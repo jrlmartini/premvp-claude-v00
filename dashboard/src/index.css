@@ -53,24 +53,41 @@ body {
 }
 
 .kpi-display {
-  font-size: clamp(1.9rem, 2.4vw, 2.5rem);
+  display: block;
+  max-width: 100%;
+  font-size: clamp(1.5rem, 2.2vw, 2.3rem);
   font-weight: 700;
-  line-height: 1.05;
+  line-height: 1.08;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .kpi-value {
-  font-size: clamp(1.4rem, 1.8vw, 1.95rem);
+  display: block;
+  max-width: 100%;
+  font-size: clamp(1.1rem, 1.6vw, 1.6rem);
   font-weight: 600;
   line-height: 1.1;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .kpi-inline {
-  font-size: clamp(1.3rem, 1.6vw, 1.7rem);
+  display: inline-block;
+  max-width: 100%;
+  font-size: clamp(1rem, 1.3vw, 1.3rem);
   font-weight: 600;
   line-height: 1.1;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+}
+
+.kpi-icon {
+  flex-shrink: 0;
 }
 
 .kpi-tile {
@@ -100,4 +117,10 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-in-up { animation: none; opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .kpi-display { font-size: clamp(1.4rem, 7vw, 2rem); }
+  .kpi-value { font-size: clamp(1rem, 5vw, 1.4rem); }
+  .kpi-inline { font-size: clamp(0.95rem, 4.5vw, 1.2rem); }
 }
