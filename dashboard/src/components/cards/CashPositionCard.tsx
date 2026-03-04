@@ -12,7 +12,7 @@ import { Card, CardHeader } from '../ui/Card'
 import { Badge } from '../ui/Badge'
 import { cashPosition } from '../../data/mockData'
 import { formatBRL, formatPercent } from '../../lib/utils'
-import { tooltipStyle, axisTickStyle, axisValueTickStyle } from '../../lib/chartStyles'
+import { tooltipProps, axisTickStyle, axisValueTickStyle } from '../../lib/chartStyles'
 
 interface CashPositionCardProps {
   delay?: number
@@ -28,8 +28,8 @@ export function CashPositionCard({ delay = 0 }: CashPositionCardProps) {
         iconColor="var(--chart-2)"
       />
 
-      <div style={{ marginBottom: 16 }}>
-        <div className="font-mono" style={{ fontSize: 28, fontWeight: 700, lineHeight: 1.1, color: 'var(--txt-main)' }}>
+      <div className="kpi-tile" style={{ marginBottom: 16 }}>
+        <div className="font-mono kpi-display" style={{ color: 'var(--txt-main)' }}>
           {formatBRL(cashPosition.current)}
         </div>
         <div className="flex items-center" style={{ gap: 6, marginTop: 8 }}>
@@ -56,7 +56,7 @@ export function CashPositionCard({ delay = 0 }: CashPositionCardProps) {
               tickFormatter={(v: number) => `${(v / 1_000_000).toFixed(1)}M`}
             />
             <Tooltip
-              contentStyle={tooltipStyle}
+              {...tooltipProps}
               formatter={(value?: number) => [formatBRL(value ?? 0), 'Saldo']}
             />
             <Bar dataKey="value" radius={[6, 6, 0, 0]} animationDuration={600} animationEasing="ease-in-out">

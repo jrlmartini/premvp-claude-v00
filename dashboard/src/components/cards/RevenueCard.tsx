@@ -13,7 +13,7 @@ import { Card, CardHeader } from '../ui/Card'
 import { Badge } from '../ui/Badge'
 import { revenueData } from '../../data/mockData'
 import { formatBRL, formatPercent } from '../../lib/utils'
-import { tooltipStyle, axisTickStyle, axisValueTickStyle, gridStyle } from '../../lib/chartStyles'
+import { tooltipProps, axisTickStyle, axisValueTickStyle, gridStyle } from '../../lib/chartStyles'
 
 interface RevenueCardProps {
   delay?: number
@@ -36,11 +36,11 @@ export function RevenueCard({ delay = 0 }: RevenueCardProps) {
       {/* KPI Row */}
       <div className="grid grid-cols-1 sm:grid-cols-3" style={{ gap: 16, marginBottom: 16 }}>
         {/* MTD */}
-        <div style={{ padding: 12, borderRadius: 8, backgroundColor: 'var(--bg-main)' }}>
+        <div className="kpi-tile" style={{ padding: 12, borderRadius: 8, backgroundColor: 'var(--bg-main)' }}>
           <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)', marginBottom: 4 }}>
             Receita MTD
           </div>
-          <div className="font-mono" style={{ fontSize: 28, fontWeight: 700, lineHeight: 1.1, color: 'var(--txt-main)' }}>
+          <div className="font-mono kpi-display" style={{ color: 'var(--txt-main)' }}>
             {formatBRL(revenueData.mtd.actual)}
           </div>
           <div className="flex items-center" style={{ gap: 4, marginTop: 8 }}>
@@ -56,11 +56,11 @@ export function RevenueCard({ delay = 0 }: RevenueCardProps) {
         </div>
 
         {/* YTD */}
-        <div style={{ padding: 12, borderRadius: 8, backgroundColor: 'var(--bg-main)' }}>
+        <div className="kpi-tile" style={{ padding: 12, borderRadius: 8, backgroundColor: 'var(--bg-main)' }}>
           <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)', marginBottom: 4 }}>
             Receita YTD
           </div>
-          <div className="font-mono" style={{ fontSize: 28, fontWeight: 700, lineHeight: 1.1, color: 'var(--txt-main)' }}>
+          <div className="font-mono kpi-display" style={{ color: 'var(--txt-main)' }}>
             {formatBRL(revenueData.ytd.actual)}
           </div>
           <div className="flex items-center" style={{ gap: 4, marginTop: 8 }}>
@@ -76,11 +76,11 @@ export function RevenueCard({ delay = 0 }: RevenueCardProps) {
         </div>
 
         {/* Average */}
-        <div style={{ padding: 12, borderRadius: 8, backgroundColor: 'var(--bg-main)' }}>
+        <div className="kpi-tile" style={{ padding: 12, borderRadius: 8, backgroundColor: 'var(--bg-main)' }}>
           <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)', marginBottom: 4 }}>
             Média Mensal
           </div>
-          <div className="font-mono" style={{ fontSize: 20, fontWeight: 600, lineHeight: 1.2, color: 'var(--txt-main)' }}>
+          <div className="font-mono kpi-value" style={{ color: 'var(--txt-main)' }}>
             {formatBRL(revenueData.mtd.average)}
           </div>
           <div className="flex items-center" style={{ gap: 4, marginTop: 8 }}>
@@ -109,7 +109,7 @@ export function RevenueCard({ delay = 0 }: RevenueCardProps) {
               tickFormatter={(v: number) => `${(v / 1000).toFixed(0)}k`}
             />
             <Tooltip
-              contentStyle={tooltipStyle}
+              {...tooltipProps}
               formatter={(value?: number) => [formatBRL(value ?? 0), 'Receita']}
             />
             <ReferenceLine

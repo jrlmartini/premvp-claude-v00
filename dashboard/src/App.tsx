@@ -10,6 +10,7 @@ import { RfmHeatmapCard } from './components/cards/RfmHeatmapCard'
 import { ContractsCard } from './components/cards/ContractsCard'
 import { WaterTreatmentCard } from './components/cards/WaterTreatmentCard'
 import { ArAgingCard } from './components/cards/ArAgingCard'
+import { ButtonShowcaseCard } from './components/cards/ButtonShowcaseCard'
 
 // Responsive breakpoints per design system:
 // xl ≥1440px — Full grid, sidebar expanded
@@ -86,6 +87,7 @@ function App() {
             <div style={{ gridColumn: span2 }}><EbitdaCard delay={240} /></div>
             <ContractsCard delay={320} />
             <WaterTreatmentCard delay={400} />
+            <ButtonShowcaseCard delay={440} />
 
             {/* Top Customers (2 cols) + RFM (2 cols) */}
             <div style={{ gridColumn: span2 }}><TopCustomersCard delay={480} /></div>

@@ -9,6 +9,12 @@ export const tooltipStyle: React.CSSProperties = {
   fontSize: 12,
 }
 
+export const tooltipProps = {
+  contentStyle: tooltipStyle,
+  itemStyle: { color: 'var(--txt-main)' },
+  labelStyle: { color: 'var(--txt-secondary)' },
+}
+
 export const chartColors = [
   'var(--chart-1)',
   'var(--chart-2)',

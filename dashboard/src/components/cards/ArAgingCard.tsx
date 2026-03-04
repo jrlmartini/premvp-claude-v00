@@ -11,7 +11,7 @@ import {
 import { Card, CardHeader } from '../ui/Card'
 import { arAgingData } from '../../data/mockData'
 import { formatBRL } from '../../lib/utils'
-import { tooltipStyle, axisValueTickStyle, axisTickStyle } from '../../lib/chartStyles'
+import { tooltipProps, axisValueTickStyle, axisTickStyle } from '../../lib/chartStyles'
 
 interface ArAgingCardProps {
   delay?: number
@@ -29,9 +29,9 @@ export function ArAgingCard({ delay = 0 }: ArAgingCardProps) {
         iconColor="var(--chart-6)"
       />
 
-      <div style={{ marginBottom: 12 }}>
+      <div className="kpi-tile" style={{ marginBottom: 12 }}>
         <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)' }}>Total a Receber</div>
-        <div className="font-mono" style={{ fontSize: 28, fontWeight: 700, lineHeight: 1.1, color: 'var(--txt-main)' }}>
+        <div className="font-mono kpi-display" style={{ color: 'var(--txt-main)' }}>
           {formatBRL(total)}
         </div>
       </div>
@@ -87,7 +87,7 @@ export function ArAgingCard({ delay = 0 }: ArAgingCardProps) {
               width={70}
             />
             <Tooltip
-              contentStyle={tooltipStyle}
+              {...tooltipProps}
               formatter={(value?: number) => [formatBRL(value ?? 0), 'Valor']}
             />
             <Bar dataKey="value" radius={[0, 4, 4, 0]} animationDuration={600} animationEasing="ease-in-out">

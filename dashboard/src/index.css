@@ -52,6 +52,24 @@ body {
   font-feature-settings: "tnum" 1;
 }
 
+.kpi-display {
+  font-size: clamp(1.5rem, 2vw, 1.875rem);
+  font-weight: 700;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+.kpi-value {
+  font-size: clamp(1rem, 1.2vw, 1.25rem);
+  font-weight: 600;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.kpi-tile {
+  min-width: 0;
+}
+
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg-card); }
 ::-webkit-scrollbar-thumb { background: var(--str-default); border-radius: 3px; }

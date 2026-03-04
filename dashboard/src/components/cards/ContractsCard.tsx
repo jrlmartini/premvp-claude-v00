@@ -20,12 +20,12 @@ export function ContractsCard({ delay = 0 }: ContractsCardProps) {
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         {/* Active contracts */}
-        <div className="flex items-center justify-between" style={{ padding: 12, borderRadius: 8, backgroundColor: 'var(--bg-main)' }}>
+        <div className="flex items-center justify-between kpi-tile" style={{ padding: 12, borderRadius: 8, backgroundColor: 'var(--bg-main)' }}>
           <div className="flex items-center" style={{ gap: 8 }}>
             <FileCheck size={16} strokeWidth={1.5} style={{ color: 'var(--chart-1)' }} />
             <span style={{ fontSize: 14, fontWeight: 400, lineHeight: 1.5, color: 'var(--txt-main)' }}>Ativos</span>
           </div>
-          <span className="font-mono" style={{ fontSize: 28, fontWeight: 700, lineHeight: 1.1, color: 'var(--txt-main)' }}>
+          <span className="font-mono kpi-display" style={{ color: 'var(--txt-main)' }}>
             {contractsData.active}
           </span>
         </div>
@@ -40,7 +40,7 @@ export function ContractsCard({ delay = 0 }: ContractsCardProps) {
         </div>
 
         {/* New */}
-        <div className="flex items-center justify-between" style={{ padding: 12, borderRadius: 8, backgroundColor: 'var(--bg-main)' }}>
+        <div className="flex items-center justify-between kpi-tile" style={{ padding: 12, borderRadius: 8, backgroundColor: 'var(--bg-main)' }}>
           <div className="flex items-center" style={{ gap: 8 }}>
             <Plus size={16} strokeWidth={1.5} style={{ color: 'var(--st-success)' }} />
             <span style={{ fontSize: 14, fontWeight: 400, lineHeight: 1.5, color: 'var(--txt-main)' }}>Novos este mês</span>
@@ -49,18 +49,18 @@ export function ContractsCard({ delay = 0 }: ContractsCardProps) {
         </div>
 
         {/* Renewal rate */}
-        <div className="flex items-center justify-between" style={{ padding: 12, borderRadius: 8, backgroundColor: 'var(--bg-main)' }}>
+        <div className="flex items-center justify-between kpi-tile" style={{ padding: 12, borderRadius: 8, backgroundColor: 'var(--bg-main)' }}>
           <div className="flex items-center" style={{ gap: 8 }}>
             <RefreshCw size={16} strokeWidth={1.5} style={{ color: 'var(--chart-3)' }} />
             <span style={{ fontSize: 14, fontWeight: 400, lineHeight: 1.5, color: 'var(--txt-main)' }}>Taxa de Renovação</span>
           </div>
-          <span className="font-mono" style={{ fontSize: 20, fontWeight: 600, lineHeight: 1.2, color: 'var(--chart-1)' }}>
+          <span className="font-mono kpi-value" style={{ color: 'var(--chart-1)' }}>
             {formatPercent(contractsData.renewalRate)}
           </span>
         </div>
 
         {/* Churn */}
-        <div style={{ paddingTop: 8, borderTop: '1px solid var(--str-default)' }}>
+        <div style={{ paddingTop: 8, borderTop: '0.5px solid var(--str-default)' }}>
           <div className="flex items-center justify-between">
             <span style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)' }}>Churn Rate</span>
             <span className="font-mono" style={{ fontSize: 14, fontWeight: 500, color: 'var(--st-danger)' }}>

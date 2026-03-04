@@ -11,7 +11,7 @@ import {
 import { Card, CardHeader } from '../ui/Card'
 import { operationalCashflow } from '../../data/mockData'
 import { formatBRL } from '../../lib/utils'
-import { tooltipStyle, axisTickStyle, axisValueTickStyle } from '../../lib/chartStyles'
+import { tooltipProps, axisTickStyle, axisValueTickStyle } from '../../lib/chartStyles'
 
 interface CashflowCardProps {
   delay?: number
@@ -29,20 +29,20 @@ export function CashflowCard({ delay = 0 }: CashflowCardProps) {
 
       {/* KPIs */}
       <div className="grid grid-cols-2" style={{ gap: 12, marginBottom: 16 }}>
-        <div style={{ padding: 10, borderRadius: 8, backgroundColor: 'var(--bg-main)' }}>
+        <div className="kpi-tile" style={{ padding: 10, borderRadius: 8, backgroundColor: 'var(--bg-main)' }}>
           <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)', marginBottom: 4 }}>
             Geração MTD
           </div>
-          <div className="font-mono flex items-center" style={{ fontSize: 20, fontWeight: 600, lineHeight: 1.2, color: 'var(--st-success)', gap: 4 }}>
+          <div className="font-mono kpi-value flex items-center" style={{ color: 'var(--st-success)', gap: 4 }}>
             <ArrowUpRight size={16} strokeWidth={1.5} />
             {formatBRL(operationalCashflow.mtd.net)}
           </div>
         </div>
-        <div style={{ padding: 10, borderRadius: 8, backgroundColor: 'var(--bg-main)' }}>
+        <div className="kpi-tile" style={{ padding: 10, borderRadius: 8, backgroundColor: 'var(--bg-main)' }}>
           <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)', marginBottom: 4 }}>
             Geração YTD
           </div>
-          <div className="font-mono flex items-center" style={{ fontSize: 20, fontWeight: 600, lineHeight: 1.2, color: 'var(--st-success)', gap: 4 }}>
+          <div className="font-mono kpi-value flex items-center" style={{ color: 'var(--st-success)', gap: 4 }}>
             <ArrowUpRight size={16} strokeWidth={1.5} />
             {formatBRL(operationalCashflow.ytd.net)}
           </div>
@@ -84,7 +84,7 @@ export function CashflowCard({ delay = 0 }: CashflowCardProps) {
               tickFormatter={(v: number) => `${(v / 1_000_000).toFixed(1)}M`}
             />
             <Tooltip
-              contentStyle={tooltipStyle}
+              {...tooltipProps}
               formatter={(value?: number, name?: string) => [
                 formatBRL(value ?? 0),
                 name === 'inflow' ? 'Entradas' : name === 'outflow' ? 'Saídas' : 'Líquido',
