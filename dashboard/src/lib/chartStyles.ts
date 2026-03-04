@@ -1,37 +1,44 @@
 // Shared chart styles per design system spec
 
 export const tooltipStyle: React.CSSProperties = {
-  backgroundColor: 'white',
-  border: '1px solid var(--neutral-200)',
+  backgroundColor: 'var(--bg-card)',
+  border: '0.5px solid var(--str-default)',
   borderRadius: 12,
-  boxShadow: '0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)',
-  fontFamily: "'JetBrains Mono', monospace",
+  color: 'var(--txt-main)',
+  fontFamily: "'Outfit', sans-serif",
   fontSize: 12,
 }
 
-// Design system chart color sequence
+export const tooltipProps = {
+  contentStyle: tooltipStyle,
+  itemStyle: { color: 'var(--txt-main)' },
+  labelStyle: { color: 'var(--txt-secondary)' },
+}
+
 export const chartColors = [
-  '#0B6E4F', // primary
-  '#1B4965', // secondary
-  '#62B6CB', // accent
-  '#14A676', // primary-light
-  '#F4A261', // accent-warm
-  '#2D6A8F', // secondary-light
+  'var(--chart-1)',
+  'var(--chart-2)',
+  'var(--chart-3)',
+  'var(--chart-4)',
+  'var(--chart-5)',
+  'var(--chart-6)',
+  'var(--chart-7)',
+  'var(--chart-other)',
 ] as const
 
 export const axisTickStyle = {
   fontSize: 11,
-  fill: 'var(--neutral-500)',
-  fontFamily: "'Inter', sans-serif",
+  fill: 'var(--txt-secondary)',
+  fontFamily: "'Outfit', sans-serif",
 }
 
 export const axisValueTickStyle = {
   fontSize: 11,
-  fill: 'var(--neutral-500)',
-  fontFamily: "'JetBrains Mono', monospace",
+  fill: 'var(--txt-secondary)',
+  fontFamily: "'Outfit', sans-serif",
 }
 
 export const gridStyle = {
-  stroke: 'var(--neutral-200)',
-  strokeDasharray: '3 3',
+  stroke: 'var(--str-default)',
+  strokeOpacity: 0.5,
 }
