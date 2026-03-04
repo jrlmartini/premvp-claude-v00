@@ -2,7 +2,7 @@ import { FileCheck, AlertTriangle, Plus, RefreshCw } from 'lucide-react'
 import { Card, CardHeader } from '../ui/Card'
 import { Badge } from '../ui/Badge'
 import { contractsData } from '../../data/mockData'
-import { formatPercent } from '../../lib/utils'
+import { formatCompactNumber, formatPercent } from '../../lib/utils'
 
 interface ContractsCardProps {
   delay?: number
@@ -26,7 +26,7 @@ export function ContractsCard({ delay = 0 }: ContractsCardProps) {
             <span style={{ fontSize: 14, fontWeight: 400, lineHeight: 1.5, color: 'var(--txt-main)' }}>Ativos</span>
           </div>
           <span className="font-mono kpi-display" style={{ color: 'var(--txt-main)' }}>
-            {contractsData.active}
+            {formatCompactNumber(contractsData.active)}
           </span>
         </div>
 
@@ -36,7 +36,7 @@ export function ContractsCard({ delay = 0 }: ContractsCardProps) {
             <AlertTriangle size={16} strokeWidth={1.5} style={{ color: 'var(--st-warning)' }} />
             <span style={{ fontSize: 14, fontWeight: 400, lineHeight: 1.5, color: 'var(--txt-main)' }}>Vencendo em 30 dias</span>
           </div>
-          <Badge variant="warning">{contractsData.expiringSoon}</Badge>
+          <Badge variant="warning">{formatCompactNumber(contractsData.expiringSoon)}</Badge>
         </div>
 
         {/* New */}
@@ -45,7 +45,7 @@ export function ContractsCard({ delay = 0 }: ContractsCardProps) {
             <Plus size={16} strokeWidth={1.5} style={{ color: 'var(--st-success)' }} />
             <span style={{ fontSize: 14, fontWeight: 400, lineHeight: 1.5, color: 'var(--txt-main)' }}>Novos este mês</span>
           </div>
-          <Badge variant="success">{contractsData.newThisMonth}</Badge>
+          <Badge variant="success">{formatCompactNumber(contractsData.newThisMonth)}</Badge>
         </div>
 
         {/* Renewal rate */}

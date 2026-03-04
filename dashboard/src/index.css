@@ -56,7 +56,7 @@ body {
   display: block;
   max-width: 100%;
   min-width: 0;
-  font-size: clamp(1.5rem, 2.2vw, 2.3rem);
+  font-size: 30px;
   font-weight: 700;
   line-height: 1.08;
   white-space: nowrap;
@@ -68,9 +68,9 @@ body {
   display: block;
   max-width: 100%;
   min-width: 0;
-  font-size: clamp(1.1rem, 1.6vw, 1.6rem);
-  font-weight: 600;
-  line-height: 1.1;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.08;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -80,7 +80,7 @@ body {
   display: inline-block;
   max-width: 100%;
   min-width: 0;
-  font-size: clamp(1rem, 1.3vw, 1.3rem);
+  font-size: 20px;
   font-weight: 600;
   line-height: 1.1;
   white-space: nowrap;
@@ -123,7 +123,7 @@ body {
 }
 
 @media (max-width: 768px) {
-  .kpi-display { font-size: clamp(1.4rem, 7vw, 2rem); }
-  .kpi-value { font-size: clamp(1rem, 5vw, 1.4rem); }
-  .kpi-inline { font-size: clamp(0.95rem, 4.5vw, 1.2rem); }
+  .kpi-display,
+  .kpi-value { font-size: 24px; }
+  .kpi-inline { font-size: 18px; }
 }
