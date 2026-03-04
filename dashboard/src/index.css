@@ -86,6 +86,15 @@ body {
   animation: pulse-soft 2s ease-in-out infinite;
 }
 
+/* Button hover — scale(1.02) 150ms per design system */
+button {
+  transition: transform 0.15s ease;
+}
+
+button:hover {
+  transform: scale(1.02);
+}
+
 /* Accessibility — focus indicators per design system */
 *:focus-visible {
   outline: 2px solid var(--primary);
