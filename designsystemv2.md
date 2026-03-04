@@ -19,13 +19,18 @@ Aplicar em todos os KPIs, tabelas e tooltips:
 - **Moeda BRL:** sempre com prefixo e espaço: `R$ `.
 
 ### 2.2 Tipografia de KPI (consistência e overflow)
-- Todo valor principal de KPI deve usar **Display 30px, Bold, tabular-nums**.
-- Valores secundários inline podem usar 20px sem quebrar hierarquia.
-- Em telas pequenas, reduzir apenas para preservar legibilidade sem estourar card.
+Definir a escala por contexto do card:
+
+- **KPI hero (cards principais):** 30px, Bold, tabular-nums.
+- **KPI em tile compacto (cards com 1 coluna estreita):** 24px, Bold, tabular-nums.
+- **Valor inline de apoio (linhas de detalhe):** 20px, SemiBold.
+- Em telas pequenas, reduzir para 24px (hero), 20px (compacto) e 18px (inline).
 - KPI deve usar:
   - `white-space: nowrap`
   - `overflow: hidden`
   - `text-overflow: ellipsis`
+
+Regra de montagem: evitar duas colunas para tiles numéricos quando a largura útil causar truncamento recorrente; preferir pilha vertical para preservar leitura.
 
 ### 2.3 Regras de conteúdo em cards
 - Números em cards com significado financeiro devem usar formato monetário compacto (`R$ + valor compactado`).
