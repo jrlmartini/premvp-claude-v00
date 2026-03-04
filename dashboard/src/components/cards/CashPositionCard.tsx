@@ -12,6 +12,7 @@ import { Card, CardHeader } from '../ui/Card'
 import { Badge } from '../ui/Badge'
 import { cashPosition } from '../../data/mockData'
 import { formatBRL, formatPercent } from '../../lib/utils'
+import { tooltipStyle, axisTickStyle, axisValueTickStyle } from '../../lib/chartStyles'
 
 interface CashPositionCardProps {
   delay?: number
@@ -27,45 +28,38 @@ export function CashPositionCard({ delay = 0 }: CashPositionCardProps) {
         iconColor="var(--secondary)"
       />
 
-      <div className="mb-4">
-        <div className="font-mono text-2xl font-bold" style={{ color: 'var(--neutral-900)' }}>
+      <div style={{ marginBottom: 16 }}>
+        <div className="font-mono" style={{ fontSize: 28, fontWeight: 700, lineHeight: 1.1, color: 'var(--neutral-900)' }}>
           {formatBRL(cashPosition.current)}
         </div>
-        <div className="flex items-center gap-1.5 mt-1">
-          <TrendingUp size={14} style={{ color: 'var(--success)' }} />
+        <div className="flex items-center" style={{ gap: 6, marginTop: 8 }}>
+          <TrendingUp size={16} strokeWidth={1.5} style={{ color: 'var(--success)' }} className="animate-pulse-soft" />
           <Badge variant="success">
             +{formatPercent(cashPosition.change)} vs mês anterior
           </Badge>
         </div>
       </div>
 
-      <div className="h-36">
+      <div style={{ height: 144 }}>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={cashPosition.history}>
             <XAxis
               dataKey="month"
-              tick={{ fontSize: 11, fill: 'var(--neutral-500)' }}
+              tick={axisTickStyle}
               axisLine={false}
               tickLine={false}
             />
             <YAxis
-              tick={{ fontSize: 10, fill: 'var(--neutral-500)', fontFamily: 'JetBrains Mono' }}
+              tick={axisValueTickStyle}
               axisLine={false}
               tickLine={false}
               tickFormatter={(v: number) => `${(v / 1_000_000).toFixed(1)}M`}
             />
             <Tooltip
-              contentStyle={{
-                backgroundColor: 'white',
-                border: '1px solid var(--neutral-200)',
-                borderRadius: 12,
-                boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
-                fontFamily: 'JetBrains Mono',
-                fontSize: 12,
-              }}
+              contentStyle={tooltipStyle}
               formatter={(value?: number) => [formatBRL(value ?? 0), 'Saldo']}
             />
-            <Bar dataKey="value" radius={[6, 6, 0, 0]} animationDuration={600}>
+            <Bar dataKey="value" radius={[6, 6, 0, 0]} animationDuration={600} animationEasing="ease-in-out">
               {cashPosition.history.map((_, index) => (
                 <Cell
                   key={index}

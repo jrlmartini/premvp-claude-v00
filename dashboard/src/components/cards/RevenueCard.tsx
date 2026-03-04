@@ -13,6 +13,7 @@ import { Card, CardHeader } from '../ui/Card'
 import { Badge } from '../ui/Badge'
 import { revenueData } from '../../data/mockData'
 import { formatBRL, formatPercent } from '../../lib/utils'
+import { tooltipStyle, axisTickStyle, axisValueTickStyle, gridStyle } from '../../lib/chartStyles'
 
 interface RevenueCardProps {
   delay?: number
@@ -24,7 +25,7 @@ export function RevenueCard({ delay = 0 }: RevenueCardProps) {
   const mtdVsAvg = ((revenueData.mtd.actual / revenueData.mtd.average) * 100) - 100
 
   return (
-    <Card className="col-span-2" delay={delay}>
+    <Card className="col-span-2 md:col-span-2 sm:col-span-1" delay={delay}>
       <CardHeader
         icon={DollarSign}
         title="Receita"
@@ -33,20 +34,20 @@ export function RevenueCard({ delay = 0 }: RevenueCardProps) {
       />
 
       {/* KPI Row */}
-      <div className="grid grid-cols-3 gap-4 mb-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3" style={{ gap: 16, marginBottom: 16 }}>
         {/* MTD */}
-        <div className="p-3 rounded-lg" style={{ backgroundColor: 'var(--neutral-50)' }}>
-          <div className="text-xs font-medium mb-1" style={{ color: 'var(--neutral-500)' }}>
+        <div style={{ padding: 12, borderRadius: 8, backgroundColor: 'var(--neutral-50)' }}>
+          <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--neutral-500)', marginBottom: 4 }}>
             Receita MTD
           </div>
-          <div className="font-mono text-lg font-bold" style={{ color: 'var(--neutral-900)' }}>
+          <div className="font-mono" style={{ fontSize: 28, fontWeight: 700, lineHeight: 1.1, color: 'var(--neutral-900)' }}>
             {formatBRL(revenueData.mtd.actual)}
           </div>
-          <div className="flex items-center gap-1 mt-1">
+          <div className="flex items-center" style={{ gap: 4, marginTop: 8 }}>
             {mtdPct >= 0 ? (
-              <TrendingUp size={12} style={{ color: 'var(--success)' }} />
+              <TrendingUp size={16} strokeWidth={1.5} style={{ color: 'var(--success)' }} className="animate-pulse-soft" />
             ) : (
-              <TrendingDown size={12} style={{ color: 'var(--danger)' }} />
+              <TrendingDown size={16} strokeWidth={1.5} style={{ color: 'var(--danger)' }} />
             )}
             <Badge variant={mtdPct >= 0 ? 'success' : 'danger'}>
               {formatPercent(mtdPct)} vs meta
@@ -55,18 +56,18 @@ export function RevenueCard({ delay = 0 }: RevenueCardProps) {
         </div>
 
         {/* YTD */}
-        <div className="p-3 rounded-lg" style={{ backgroundColor: 'var(--neutral-50)' }}>
-          <div className="text-xs font-medium mb-1" style={{ color: 'var(--neutral-500)' }}>
+        <div style={{ padding: 12, borderRadius: 8, backgroundColor: 'var(--neutral-50)' }}>
+          <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--neutral-500)', marginBottom: 4 }}>
             Receita YTD
           </div>
-          <div className="font-mono text-lg font-bold" style={{ color: 'var(--neutral-900)' }}>
+          <div className="font-mono" style={{ fontSize: 28, fontWeight: 700, lineHeight: 1.1, color: 'var(--neutral-900)' }}>
             {formatBRL(revenueData.ytd.actual)}
           </div>
-          <div className="flex items-center gap-1 mt-1">
+          <div className="flex items-center" style={{ gap: 4, marginTop: 8 }}>
             {ytdPct >= 0 ? (
-              <TrendingUp size={12} style={{ color: 'var(--success)' }} />
+              <TrendingUp size={16} strokeWidth={1.5} style={{ color: 'var(--success)' }} className="animate-pulse-soft" />
             ) : (
-              <TrendingDown size={12} style={{ color: 'var(--danger)' }} />
+              <TrendingDown size={16} strokeWidth={1.5} style={{ color: 'var(--danger)' }} />
             )}
             <Badge variant={ytdPct >= 0 ? 'success' : 'danger'}>
               {formatPercent(ytdPct)} vs meta
@@ -75,14 +76,14 @@ export function RevenueCard({ delay = 0 }: RevenueCardProps) {
         </div>
 
         {/* Average */}
-        <div className="p-3 rounded-lg" style={{ backgroundColor: 'var(--neutral-50)' }}>
-          <div className="text-xs font-medium mb-1" style={{ color: 'var(--neutral-500)' }}>
+        <div style={{ padding: 12, borderRadius: 8, backgroundColor: 'var(--neutral-50)' }}>
+          <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--neutral-500)', marginBottom: 4 }}>
             Média Mensal
           </div>
-          <div className="font-mono text-lg font-bold" style={{ color: 'var(--neutral-900)' }}>
+          <div className="font-mono" style={{ fontSize: 20, fontWeight: 600, lineHeight: 1.2, color: 'var(--neutral-900)' }}>
             {formatBRL(revenueData.mtd.average)}
           </div>
-          <div className="flex items-center gap-1 mt-1">
+          <div className="flex items-center" style={{ gap: 4, marginTop: 8 }}>
             <Badge variant={mtdVsAvg >= 0 ? 'success' : 'warning'}>
               {formatPercent(mtdVsAvg)} vs média
             </Badge>
@@ -90,8 +91,8 @@ export function RevenueCard({ delay = 0 }: RevenueCardProps) {
         </div>
       </div>
 
-      {/* Chart */}
-      <div className="h-48">
+      {/* Chart — mini chart height 48px per spec, but for this rich chart we use more */}
+      <div style={{ height: 192 }}>
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={revenueData.dailyMTD}>
             <defs>
@@ -100,28 +101,21 @@ export function RevenueCard({ delay = 0 }: RevenueCardProps) {
                 <stop offset="95%" stopColor="#0B6E4F" stopOpacity={0} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="var(--neutral-200)" />
+            <CartesianGrid {...gridStyle} />
             <XAxis
               dataKey="day"
-              tick={{ fontSize: 11, fill: 'var(--neutral-500)' }}
+              tick={axisTickStyle}
               axisLine={{ stroke: 'var(--neutral-200)' }}
               tickLine={false}
             />
             <YAxis
-              tick={{ fontSize: 11, fill: 'var(--neutral-500)', fontFamily: 'JetBrains Mono' }}
+              tick={axisValueTickStyle}
               axisLine={false}
               tickLine={false}
               tickFormatter={(v: number) => `${(v / 1000).toFixed(0)}k`}
             />
             <Tooltip
-              contentStyle={{
-                backgroundColor: 'white',
-                border: '1px solid var(--neutral-200)',
-                borderRadius: 12,
-                boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
-                fontFamily: 'JetBrains Mono',
-                fontSize: 12,
-              }}
+              contentStyle={tooltipStyle}
               formatter={(value?: number) => [formatBRL(value ?? 0), 'Receita']}
             />
             <ReferenceLine

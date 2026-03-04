@@ -12,11 +12,19 @@ const variants = {
 }
 
 export function Badge({ variant, children }: BadgeProps) {
-  const style = variants[variant]
+  const s = variants[variant]
   return (
     <span
-      className="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium"
-      style={{ backgroundColor: style.bg, color: style.color }}
+      className="inline-flex items-center"
+      style={{
+        backgroundColor: s.bg,
+        color: s.color,
+        borderRadius: 6,
+        padding: '2px 8px',
+        fontSize: 12,
+        fontWeight: 500,
+        lineHeight: 1.4,
+      }}
     >
       {children}
     </span>
