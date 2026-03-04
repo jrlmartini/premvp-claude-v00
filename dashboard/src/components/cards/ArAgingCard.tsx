@@ -10,7 +10,7 @@ import {
 } from 'recharts'
 import { Card, CardHeader } from '../ui/Card'
 import { arAgingData } from '../../data/mockData'
-import { formatBRL } from '../../lib/utils'
+import { formatCompactBRL, formatCompactNumber } from '../../lib/utils'
 import { tooltipProps, axisValueTickStyle, axisTickStyle } from '../../lib/chartStyles'
 
 interface ArAgingCardProps {
@@ -32,7 +32,7 @@ export function ArAgingCard({ delay = 0 }: ArAgingCardProps) {
       <div className="kpi-tile" style={{ marginBottom: 12 }}>
         <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)' }}>Total a Receber</div>
         <div className="font-mono kpi-display" style={{ color: 'var(--txt-main)' }}>
-          {formatBRL(total)}
+          {formatCompactBRL(total)}
         </div>
       </div>
 
@@ -47,7 +47,7 @@ export function ArAgingCard({ delay = 0 }: ArAgingCardProps) {
               backgroundColor: item.color,
               transition: 'width 0.5s ease-out',
             }}
-            title={`${item.range}: ${formatBRL(item.value)}`}
+            title={`${item.range}: ${formatCompactBRL(item.value)}`}
           />
         ))}
       </div>
@@ -61,7 +61,7 @@ export function ArAgingCard({ delay = 0 }: ArAgingCardProps) {
               <span style={{ fontSize: 14, fontWeight: 400, lineHeight: 1.5, color: 'var(--txt-main)' }}>{item.range}</span>
             </div>
             <span className="font-mono" style={{ fontSize: 12, fontWeight: 500, color: 'var(--txt-main)' }}>
-              {formatBRL(item.value)}
+              {formatCompactBRL(item.value)}
             </span>
           </div>
         ))}
@@ -76,7 +76,7 @@ export function ArAgingCard({ delay = 0 }: ArAgingCardProps) {
               tick={axisValueTickStyle}
               axisLine={false}
               tickLine={false}
-              tickFormatter={(v: number) => `${(v / 1_000_000).toFixed(1)}M`}
+              tickFormatter={(v: number) => formatCompactNumber(v)}
             />
             <YAxis
               type="category"
@@ -88,7 +88,7 @@ export function ArAgingCard({ delay = 0 }: ArAgingCardProps) {
             />
             <Tooltip
               {...tooltipProps}
-              formatter={(value?: number) => [formatBRL(value ?? 0), 'Valor']}
+              formatter={(value?: number) => [formatCompactBRL(value ?? 0), 'Valor']}
             />
             <Bar dataKey="value" radius={[0, 4, 4, 0]} animationDuration={600} animationEasing="ease-in-out">
               {arAgingData.map((entry, index) => (

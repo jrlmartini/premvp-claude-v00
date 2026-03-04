@@ -11,7 +11,7 @@ import {
 import { Card, CardHeader } from '../ui/Card'
 import { Badge } from '../ui/Badge'
 import { cashPosition } from '../../data/mockData'
-import { formatBRL, formatPercent } from '../../lib/utils'
+import { formatCompactBRL, formatCompactNumber, formatPercent } from '../../lib/utils'
 import { tooltipProps, axisTickStyle, axisValueTickStyle } from '../../lib/chartStyles'
 
 interface CashPositionCardProps {
@@ -30,7 +30,7 @@ export function CashPositionCard({ delay = 0 }: CashPositionCardProps) {
 
       <div className="kpi-tile" style={{ marginBottom: 16 }}>
         <div className="font-mono kpi-display" style={{ color: 'var(--txt-main)' }}>
-          {formatBRL(cashPosition.current)}
+          {formatCompactBRL(cashPosition.current)}
         </div>
         <div className="flex items-center" style={{ gap: 6, marginTop: 8 }}>
           <TrendingUp size={16} strokeWidth={1.5} style={{ color: 'var(--st-success)' }} className="animate-pulse-soft" />
@@ -53,11 +53,11 @@ export function CashPositionCard({ delay = 0 }: CashPositionCardProps) {
               tick={axisValueTickStyle}
               axisLine={false}
               tickLine={false}
-              tickFormatter={(v: number) => `${(v / 1_000_000).toFixed(1)}M`}
+              tickFormatter={(v: number) => formatCompactNumber(v)}
             />
             <Tooltip
               {...tooltipProps}
-              formatter={(value?: number) => [formatBRL(value ?? 0), 'Saldo']}
+              formatter={(value?: number) => [formatCompactBRL(value ?? 0), 'Saldo']}
             />
             <Bar dataKey="value" radius={[6, 6, 0, 0]} animationDuration={600} animationEasing="ease-in-out">
               {cashPosition.history.map((_, index) => (

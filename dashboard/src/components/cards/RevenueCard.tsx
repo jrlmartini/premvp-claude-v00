@@ -12,7 +12,7 @@ import {
 import { Card, CardHeader } from '../ui/Card'
 import { Badge } from '../ui/Badge'
 import { revenueData } from '../../data/mockData'
-import { formatBRL, formatPercent } from '../../lib/utils'
+import { formatCompactBRL, formatCompactNumber, formatPercent } from '../../lib/utils'
 import { tooltipProps, axisTickStyle, axisValueTickStyle, gridStyle } from '../../lib/chartStyles'
 
 interface RevenueCardProps {
@@ -41,7 +41,7 @@ export function RevenueCard({ delay = 0 }: RevenueCardProps) {
             Receita MTD
           </div>
           <div className="font-mono kpi-display" style={{ color: 'var(--txt-main)' }}>
-            {formatBRL(revenueData.mtd.actual)}
+            {formatCompactBRL(revenueData.mtd.actual)}
           </div>
           <div className="flex items-center" style={{ gap: 4, marginTop: 8 }}>
             {mtdPct >= 0 ? (
@@ -61,7 +61,7 @@ export function RevenueCard({ delay = 0 }: RevenueCardProps) {
             Receita YTD
           </div>
           <div className="font-mono kpi-display" style={{ color: 'var(--txt-main)' }}>
-            {formatBRL(revenueData.ytd.actual)}
+            {formatCompactBRL(revenueData.ytd.actual)}
           </div>
           <div className="flex items-center" style={{ gap: 4, marginTop: 8 }}>
             {ytdPct >= 0 ? (
@@ -81,7 +81,7 @@ export function RevenueCard({ delay = 0 }: RevenueCardProps) {
             Média Mensal
           </div>
           <div className="font-mono kpi-value" style={{ color: 'var(--txt-main)' }}>
-            {formatBRL(revenueData.mtd.average)}
+            {formatCompactBRL(revenueData.mtd.average)}
           </div>
           <div className="flex items-center" style={{ gap: 4, marginTop: 8 }}>
             <Badge variant={mtdVsAvg >= 0 ? 'success' : 'warning'}>
@@ -106,11 +106,11 @@ export function RevenueCard({ delay = 0 }: RevenueCardProps) {
               tick={axisValueTickStyle}
               axisLine={false}
               tickLine={false}
-              tickFormatter={(v: number) => `${(v / 1000).toFixed(0)}k`}
+              tickFormatter={(v: number) => formatCompactNumber(v)}
             />
             <Tooltip
               {...tooltipProps}
-              formatter={(value?: number) => [formatBRL(value ?? 0), 'Receita']}
+              formatter={(value?: number) => [formatCompactBRL(value ?? 0), 'Receita']}
             />
             <ReferenceLine
               y={revenueData.mtd.goal / 22}

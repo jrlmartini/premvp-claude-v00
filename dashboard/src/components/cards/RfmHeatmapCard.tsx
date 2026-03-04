@@ -1,6 +1,7 @@
 import { Grid3X3 } from 'lucide-react'
 import { Card, CardHeader } from '../ui/Card'
 import { rfmData } from '../../data/mockData'
+import { formatCompactNumber } from '../../lib/utils'
 
 interface RfmHeatmapCardProps {
   delay?: number
@@ -183,7 +184,7 @@ export function RfmHeatmapCard({ delay = 0 }: RfmHeatmapCardProps) {
                   <div className="flex justify-between" style={{ fontSize: 12, fontWeight: 500, color: 'var(--txt-secondary)' }}>
                     <span>{segment.count} clientes</span>
                     <span className="font-mono">
-                      {(segment.revenue / 1_000_000).toFixed(1)}M
+                      {formatCompactNumber(segment.revenue)}
                     </span>
                   </div>
                 </div>

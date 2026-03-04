@@ -10,7 +10,7 @@ import {
 } from 'recharts'
 import { Card, CardHeader } from '../ui/Card'
 import { operationalCashflow } from '../../data/mockData'
-import { formatBRL } from '../../lib/utils'
+import { formatCompactBRL, formatCompactNumber } from '../../lib/utils'
 import { tooltipProps, axisTickStyle, axisValueTickStyle } from '../../lib/chartStyles'
 
 interface CashflowCardProps {
@@ -28,14 +28,14 @@ export function CashflowCard({ delay = 0 }: CashflowCardProps) {
       />
 
       {/* KPIs */}
-      <div className="grid grid-cols-2" style={{ gap: 12, marginBottom: 16 }}>
+      <div className="grid grid-cols-1 sm:grid-cols-2" style={{ gap: 12, marginBottom: 16 }}>
         <div className="kpi-tile" style={{ padding: 10, borderRadius: 8, backgroundColor: 'var(--bg-main)' }}>
           <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)', marginBottom: 4 }}>
             Geração MTD
           </div>
           <div className="font-mono kpi-value flex items-center" style={{ color: 'var(--st-success)', gap: 4 }}>
             <ArrowUpRight size={16} strokeWidth={1.5} />
-            {formatBRL(operationalCashflow.mtd.net)}
+            {formatCompactBRL(operationalCashflow.mtd.net)}
           </div>
         </div>
         <div className="kpi-tile" style={{ padding: 10, borderRadius: 8, backgroundColor: 'var(--bg-main)' }}>
@@ -44,25 +44,25 @@ export function CashflowCard({ delay = 0 }: CashflowCardProps) {
           </div>
           <div className="font-mono kpi-value flex items-center" style={{ color: 'var(--st-success)', gap: 4 }}>
             <ArrowUpRight size={16} strokeWidth={1.5} />
-            {formatBRL(operationalCashflow.ytd.net)}
+            {formatCompactBRL(operationalCashflow.ytd.net)}
           </div>
         </div>
       </div>
 
       {/* Inflow / Outflow detail */}
-      <div className="grid grid-cols-2" style={{ gap: 12, marginBottom: 16 }}>
+      <div className="grid grid-cols-1 sm:grid-cols-2" style={{ gap: 12, marginBottom: 16 }}>
         <div className="flex items-center" style={{ gap: 8 }}>
           <ArrowUpRight size={16} strokeWidth={1.5} style={{ color: 'var(--st-success)' }} />
           <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--txt-secondary)' }}>Entradas:</span>
-          <span className="font-mono" style={{ fontSize: 13, fontWeight: 500, color: 'var(--txt-main)' }}>
-            {formatBRL(operationalCashflow.mtd.inflow)}
+          <span className="font-mono kpi-value" style={{ color: 'var(--txt-main)' }}>
+            {formatCompactBRL(operationalCashflow.mtd.inflow)}
           </span>
         </div>
         <div className="flex items-center" style={{ gap: 8 }}>
           <ArrowDownRight size={16} strokeWidth={1.5} style={{ color: 'var(--st-danger)' }} />
           <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--txt-secondary)' }}>Saídas:</span>
-          <span className="font-mono" style={{ fontSize: 13, fontWeight: 500, color: 'var(--txt-main)' }}>
-            {formatBRL(operationalCashflow.mtd.outflow)}
+          <span className="font-mono kpi-value" style={{ color: 'var(--txt-main)' }}>
+            {formatCompactBRL(operationalCashflow.mtd.outflow)}
           </span>
         </div>
       </div>
@@ -81,12 +81,12 @@ export function CashflowCard({ delay = 0 }: CashflowCardProps) {
               tick={axisValueTickStyle}
               axisLine={false}
               tickLine={false}
-              tickFormatter={(v: number) => `${(v / 1_000_000).toFixed(1)}M`}
+              tickFormatter={(v: number) => formatCompactNumber(v)}
             />
             <Tooltip
               {...tooltipProps}
               formatter={(value?: number, name?: string) => [
-                formatBRL(value ?? 0),
+                formatCompactBRL(value ?? 0),
                 name === 'inflow' ? 'Entradas' : name === 'outflow' ? 'Saídas' : 'Líquido',
               ]}
             />

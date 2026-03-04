@@ -1,7 +1,7 @@
 import { Users, TrendingUp, TrendingDown, Minus } from 'lucide-react'
 import { Card, CardHeader } from '../ui/Card'
 import { topCustomers } from '../../data/mockData'
-import { formatBRL, formatPercent } from '../../lib/utils'
+import { formatCompactBRL, formatPercent } from '../../lib/utils'
 
 interface TopCustomersCardProps {
   delay?: number
@@ -78,7 +78,7 @@ export function TopCustomersCard({ delay = 0 }: TopCustomersCardProps) {
                     {customer.name}
                   </td>
                   <td className="font-mono" style={{ padding: '0 8px', fontSize: 14, textAlign: 'right', color: 'var(--txt-main)' }}>
-                    {formatBRL(customer.revenue)}
+                    {formatCompactBRL(customer.revenue)}
                   </td>
                   <td className="font-mono" style={{ padding: '0 8px', fontSize: 12, textAlign: 'right', color: 'var(--txt-secondary)' }}>
                     {formatPercent(customer.share)}
@@ -96,7 +96,7 @@ export function TopCustomersCard({ delay = 0 }: TopCustomersCardProps) {
                 Total Top 10
               </td>
               <td className="font-mono" style={{ padding: '0 8px', fontSize: 14, fontWeight: 700, textAlign: 'right', color: 'var(--txt-main)' }}>
-                {formatBRL(totalRevenue)}
+                {formatCompactBRL(totalRevenue)}
               </td>
               <td className="font-mono" style={{ padding: '0 8px', fontSize: 12, textAlign: 'right', color: 'var(--txt-secondary)' }}>
                 {formatPercent(topCustomers.reduce((s, c) => s + c.share, 0))}

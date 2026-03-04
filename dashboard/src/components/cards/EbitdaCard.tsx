@@ -12,7 +12,7 @@ import {
 import { Card, CardHeader } from '../ui/Card'
 import { Badge } from '../ui/Badge'
 import { ebitdaData } from '../../data/mockData'
-import { formatBRL, formatPercent } from '../../lib/utils'
+import { formatCompactBRL, formatCompactNumber, formatPercent } from '../../lib/utils'
 import { tooltipProps, axisTickStyle, axisValueTickStyle, gridStyle } from '../../lib/chartStyles'
 
 interface EbitdaCardProps {
@@ -34,7 +34,7 @@ export function EbitdaCard({ delay = 0 }: EbitdaCardProps) {
           <div className="flex items-center" style={{ gap: 6 }}>
             <Target size={16} strokeWidth={1.5} style={{ color: 'var(--txt-secondary)' }} />
             <span style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)' }}>
-              Meta: {formatBRL(ebitdaData.ytdGoal)}
+              Meta: {formatCompactBRL(ebitdaData.ytdGoal)}
             </span>
           </div>
         }
@@ -47,7 +47,7 @@ export function EbitdaCard({ delay = 0 }: EbitdaCardProps) {
             EBITDA Acumulado
           </div>
           <div className="font-mono kpi-display" style={{ color: 'var(--txt-main)' }}>
-            {formatBRL(ebitdaData.ytdAccrued)}
+            {formatCompactBRL(ebitdaData.ytdAccrued)}
           </div>
           <div style={{ marginTop: 8 }}>
             <Badge variant={ytdPct >= 0 ? 'success' : 'danger'}>
@@ -104,11 +104,11 @@ export function EbitdaCard({ delay = 0 }: EbitdaCardProps) {
               tick={axisValueTickStyle}
               axisLine={false}
               tickLine={false}
-              tickFormatter={(v: number) => `${(v / 1000).toFixed(0)}k`}
+              tickFormatter={(v: number) => formatCompactNumber(v)}
             />
             <Tooltip
               {...tooltipProps}
-              formatter={(value?: number) => [formatBRL(value ?? 0), 'EBITDA']}
+              formatter={(value?: number) => [formatCompactBRL(value ?? 0), 'EBITDA']}
             />
             <Bar dataKey="value" fill="var(--chart-1)" radius={[4, 4, 0, 0]} opacity={0.8} animationDuration={600} animationEasing="ease-in-out" />
             <Line
