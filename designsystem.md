@@ -200,7 +200,7 @@ Apply to all KPIs, tables, and tooltips:
 **Ghost**
 
 - Background: `bg-card`
-- Text: `txt-secondary` (default), `txt-main` on hover is allowed
+- Text: `txt-muted` (default),
 - Border: `str-disabled` @ 0.5px (subtle)
 - Hover: no effect
 
