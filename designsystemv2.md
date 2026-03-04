@@ -41,6 +41,12 @@ Regra de montagem: evitar duas colunas para tiles numéricos quando a largura ú
 - Para blocos com preenchimento de status (warning/danger/success), usar texto `txt-modal` quando necessário para contraste.
 - Quando houver fundo destrutivo, reforçar separação com borda destrutiva canônica (`str-destructive`).
 
+### 2.5 Modo kiosk (tela cheia)
+- Implementar alternância de tela cheia via Fullscreen API para operação contínua em TV/monitor.
+- Em modo kiosk, ocultar navegação lateral e rodapé para priorizar área útil dos dados.
+- Manter saída simples do modo kiosk com ação explícita no header (e suporte a `Esc`).
+- Atalho operacional recomendado: `Ctrl/Cmd + Shift + K`.
+
 ## 3) Checklist de revisão (v2)
 - [ ] Todos os números seguem compactação `M/k` quando aplicável.
 - [ ] Todos os valores monetários usam `R$ ` + formato pt-BR.
