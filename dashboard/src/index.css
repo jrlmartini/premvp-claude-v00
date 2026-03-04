@@ -53,17 +53,24 @@ body {
 }
 
 .kpi-display {
-  font-size: clamp(1.5rem, 2vw, 1.875rem);
+  font-size: clamp(1.9rem, 2.4vw, 2.5rem);
   font-weight: 700;
-  line-height: 1.1;
-  overflow-wrap: anywhere;
+  line-height: 1.05;
+  white-space: nowrap;
 }
 
 .kpi-value {
-  font-size: clamp(1rem, 1.2vw, 1.25rem);
+  font-size: clamp(1.4rem, 1.8vw, 1.95rem);
   font-weight: 600;
-  line-height: 1.2;
-  overflow-wrap: anywhere;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.kpi-inline {
+  font-size: clamp(1.3rem, 1.6vw, 1.7rem);
+  font-weight: 600;
+  line-height: 1.1;
+  white-space: nowrap;
 }
 
 .kpi-tile {

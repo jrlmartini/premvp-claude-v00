@@ -33,7 +33,7 @@ export function CashflowCard({ delay = 0 }: CashflowCardProps) {
           <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)', marginBottom: 4 }}>
             Geração MTD
           </div>
-          <div className="font-mono kpi-value flex items-center" style={{ color: 'var(--st-success)', gap: 4 }}>
+          <div className="font-mono kpi-display flex items-center" style={{ color: 'var(--st-success)', gap: 4 }}>
             <ArrowUpRight size={16} strokeWidth={1.5} />
             {formatCompactBRL(operationalCashflow.mtd.net)}
           </div>
@@ -42,7 +42,7 @@ export function CashflowCard({ delay = 0 }: CashflowCardProps) {
           <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)', marginBottom: 4 }}>
             Geração YTD
           </div>
-          <div className="font-mono kpi-value flex items-center" style={{ color: 'var(--st-success)', gap: 4 }}>
+          <div className="font-mono kpi-display flex items-center" style={{ color: 'var(--st-success)', gap: 4 }}>
             <ArrowUpRight size={16} strokeWidth={1.5} />
             {formatCompactBRL(operationalCashflow.ytd.net)}
           </div>
@@ -54,14 +54,14 @@ export function CashflowCard({ delay = 0 }: CashflowCardProps) {
         <div className="flex items-center" style={{ gap: 8 }}>
           <ArrowUpRight size={16} strokeWidth={1.5} style={{ color: 'var(--st-success)' }} />
           <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--txt-secondary)' }}>Entradas:</span>
-          <span className="font-mono kpi-value" style={{ color: 'var(--txt-main)' }}>
+          <span className="font-mono kpi-inline" style={{ color: 'var(--txt-main)' }}>
             {formatCompactBRL(operationalCashflow.mtd.inflow)}
           </span>
         </div>
         <div className="flex items-center" style={{ gap: 8 }}>
           <ArrowDownRight size={16} strokeWidth={1.5} style={{ color: 'var(--st-danger)' }} />
           <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--txt-secondary)' }}>Saídas:</span>
-          <span className="font-mono kpi-value" style={{ color: 'var(--txt-main)' }}>
+          <span className="font-mono kpi-inline" style={{ color: 'var(--txt-main)' }}>
             {formatCompactBRL(operationalCashflow.mtd.outflow)}
           </span>
         </div>

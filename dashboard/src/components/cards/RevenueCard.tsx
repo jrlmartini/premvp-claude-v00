@@ -80,7 +80,7 @@ export function RevenueCard({ delay = 0 }: RevenueCardProps) {
           <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)', marginBottom: 4 }}>
             Média Mensal
           </div>
-          <div className="font-mono kpi-value" style={{ color: 'var(--txt-main)' }}>
+          <div className="font-mono kpi-display" style={{ color: 'var(--txt-main)' }}>
             {formatCompactBRL(revenueData.mtd.average)}
           </div>
           <div className="flex items-center" style={{ gap: 4, marginTop: 8 }}>
