@@ -1,7 +1,7 @@
 import { Users, TrendingUp, TrendingDown, Minus } from 'lucide-react'
 import { Card, CardHeader } from '../ui/Card'
 import { topCustomers } from '../../data/mockData'
-import { formatBRL, formatPercent } from '../../lib/utils'
+import { formatCompactBRL, formatPercent } from '../../lib/utils'
 
 interface TopCustomersCardProps {
   delay?: number
@@ -14,9 +14,9 @@ const trendIcons = {
 }
 
 const trendColors = {
-  up: 'var(--success)',
-  down: 'var(--danger)',
-  stable: 'var(--neutral-500)',
+  up: 'var(--st-success)',
+  down: 'var(--st-danger)',
+  stable: 'var(--txt-secondary)',
 }
 
 export function TopCustomersCard({ delay = 0 }: TopCustomersCardProps) {
@@ -28,7 +28,7 @@ export function TopCustomersCard({ delay = 0 }: TopCustomersCardProps) {
         icon={Users}
         title="Top 10 Clientes"
         subtitle="Receita acumulada YTD"
-        iconColor="var(--secondary)"
+        iconColor="var(--chart-2)"
       />
 
       <div className="overflow-x-auto">
@@ -45,7 +45,7 @@ export function TopCustomersCard({ delay = 0 }: TopCustomersCardProps) {
                     lineHeight: 1.4,
                     textTransform: 'uppercase',
                     letterSpacing: '0.05em',
-                    color: 'var(--neutral-500)',
+                    color: 'var(--txt-secondary)',
                     paddingBottom: 8,
                     paddingLeft: 8,
                     paddingRight: 8,
@@ -63,24 +63,24 @@ export function TopCustomersCard({ delay = 0 }: TopCustomersCardProps) {
                 <tr
                   key={customer.rank}
                   style={{
-                    backgroundColor: i % 2 === 0 ? 'var(--neutral-50)' : '#FFFFFF',
-                    borderBottom: '1px solid var(--neutral-200)',
+                    backgroundColor: i % 2 === 0 ? 'var(--bg-main)' : 'var(--bg-card)',
+                    borderBottom: '1px solid var(--str-default)',
                     height: 44,
                     transition: 'background-color 0.15s ease',
                   }}
-                  onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--neutral-100)' }}
-                  onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = i % 2 === 0 ? 'var(--neutral-50)' : '#FFFFFF' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-main)' }}
+                  onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = i % 2 === 0 ? 'var(--bg-main)' : 'var(--bg-card)' }}
                 >
-                  <td style={{ padding: '0 8px', fontSize: 12, fontWeight: 500, color: 'var(--neutral-500)' }}>
+                  <td style={{ padding: '0 8px', fontSize: 12, fontWeight: 500, color: 'var(--txt-secondary)' }}>
                     {customer.rank}
                   </td>
-                  <td style={{ padding: '0 8px', fontSize: 14, fontWeight: 400, lineHeight: 1.5, color: 'var(--neutral-700)' }}>
+                  <td style={{ padding: '0 8px', fontSize: 14, fontWeight: 400, lineHeight: 1.5, color: 'var(--txt-main)' }}>
                     {customer.name}
                   </td>
-                  <td className="font-mono" style={{ padding: '0 8px', fontSize: 14, textAlign: 'right', color: 'var(--neutral-900)' }}>
-                    {formatBRL(customer.revenue)}
+                  <td className="font-mono" style={{ padding: '0 8px', fontSize: 14, textAlign: 'right', color: 'var(--txt-main)' }}>
+                    {formatCompactBRL(customer.revenue)}
                   </td>
-                  <td className="font-mono" style={{ padding: '0 8px', fontSize: 12, textAlign: 'right', color: 'var(--neutral-500)' }}>
+                  <td className="font-mono" style={{ padding: '0 8px', fontSize: 12, textAlign: 'right', color: 'var(--txt-secondary)' }}>
                     {formatPercent(customer.share)}
                   </td>
                   <td style={{ padding: '0 8px', textAlign: 'center' }}>
@@ -91,14 +91,14 @@ export function TopCustomersCard({ delay = 0 }: TopCustomersCardProps) {
             })}
           </tbody>
           <tfoot>
-            <tr style={{ borderTop: '2px solid var(--neutral-200)', height: 44 }}>
-              <td colSpan={2} style={{ padding: '0 8px', fontSize: 14, fontWeight: 600, color: 'var(--neutral-900)' }}>
+            <tr style={{ borderTop: '2px solid var(--str-default)', height: 44 }}>
+              <td colSpan={2} style={{ padding: '0 8px', fontSize: 14, fontWeight: 600, color: 'var(--txt-main)' }}>
                 Total Top 10
               </td>
-              <td className="font-mono" style={{ padding: '0 8px', fontSize: 14, fontWeight: 700, textAlign: 'right', color: 'var(--neutral-900)' }}>
-                {formatBRL(totalRevenue)}
+              <td className="font-mono" style={{ padding: '0 8px', fontSize: 14, fontWeight: 700, textAlign: 'right', color: 'var(--txt-main)' }}>
+                {formatCompactBRL(totalRevenue)}
               </td>
-              <td className="font-mono" style={{ padding: '0 8px', fontSize: 12, textAlign: 'right', color: 'var(--neutral-500)' }}>
+              <td className="font-mono" style={{ padding: '0 8px', fontSize: 12, textAlign: 'right', color: 'var(--txt-secondary)' }}>
                 {formatPercent(topCustomers.reduce((s, c) => s + c.share, 0))}
               </td>
               <td />

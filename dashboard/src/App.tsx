@@ -10,6 +10,7 @@ import { RfmHeatmapCard } from './components/cards/RfmHeatmapCard'
 import { ContractsCard } from './components/cards/ContractsCard'
 import { WaterTreatmentCard } from './components/cards/WaterTreatmentCard'
 import { ArAgingCard } from './components/cards/ArAgingCard'
+import { ButtonShowcaseCard } from './components/cards/ButtonShowcaseCard'
 
 // Responsive breakpoints per design system:
 // xl ≥1440px — Full grid, sidebar expanded
@@ -56,7 +57,7 @@ function App() {
   const span2 = cols >= 2 ? 'span 2' : 'span 1'
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'var(--neutral-50)' }}>
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-main)' }}>
       <Sidebar
         collapsed={isMobile ? false : collapsed}
         onToggle={handleToggle}
@@ -67,12 +68,12 @@ function App() {
       <div style={{ marginLeft: sidebarWidth, transition: 'margin-left 0.3s ease' }}>
         <Header onMenuToggle={handleToggle} />
 
-        <main style={{ padding: 20 }}>
+        <main style={{ padding: 24 }}>
           <div
             style={{
               display: 'grid',
               gridTemplateColumns: `repeat(${cols}, 1fr)`,
-              gap: 20,
+              gap: 24,
               maxWidth: 1440,
               margin: '0 auto',
             }}
@@ -86,6 +87,7 @@ function App() {
             <div style={{ gridColumn: span2 }}><EbitdaCard delay={240} /></div>
             <ContractsCard delay={320} />
             <WaterTreatmentCard delay={400} />
+            <ButtonShowcaseCard delay={440} />
 
             {/* Top Customers (2 cols) + RFM (2 cols) */}
             <div style={{ gridColumn: span2 }}><TopCustomersCard delay={480} /></div>
@@ -98,9 +100,9 @@ function App() {
 
         <footer
           className="text-center"
-          style={{ padding: '16px 20px', borderTop: '1px solid var(--neutral-200)' }}
+          style={{ padding: '16px 20px', borderTop: '0.5px solid var(--str-default)' }}
         >
-          <span style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--neutral-500)' }}>
+          <span style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)' }}>
             Conatus Environmental Technologies &copy; {new Date().getFullYear()} — Painel Executivo v1.0
           </span>
         </footer>

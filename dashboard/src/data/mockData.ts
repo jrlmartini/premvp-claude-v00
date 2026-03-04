@@ -158,9 +158,9 @@ export const waterTreatmentMetrics = {
 }
 
 export const arAgingData = [
-  { range: 'A vencer', value: 2_340_000, color: '#14A676' },
-  { range: '1-30 dias', value: 890_000, color: '#62B6CB' },
-  { range: '31-60 dias', value: 456_000, color: '#F4A261' },
-  { range: '61-90 dias', value: 234_000, color: '#E63946' },
-  { range: '90+ dias', value: 178_000, color: '#84112e' },
+  { range: 'A vencer', value: 2_340_000, color: 'var(--chart-4)' },
+  { range: '1-30 dias', value: 890_000, color: 'var(--chart-3)' },
+  { range: '31-60 dias', value: 456_000, color: 'var(--chart-6)' },
+  { range: '61-90 dias', value: 234_000, color: 'var(--chart-7)' },
+  { range: '90+ dias', value: 178_000, color: 'var(--str-destructive)' },
 ]

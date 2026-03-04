@@ -10,8 +10,8 @@ import {
 } from 'recharts'
 import { Card, CardHeader } from '../ui/Card'
 import { arAgingData } from '../../data/mockData'
-import { formatBRL } from '../../lib/utils'
-import { tooltipStyle, axisValueTickStyle, axisTickStyle } from '../../lib/chartStyles'
+import { formatCompactBRL, formatCompactNumber } from '../../lib/utils'
+import { tooltipProps, axisValueTickStyle, axisTickStyle } from '../../lib/chartStyles'
 
 interface ArAgingCardProps {
   delay?: number
@@ -26,18 +26,18 @@ export function ArAgingCard({ delay = 0 }: ArAgingCardProps) {
         icon={Clock}
         title="Aging de Recebíveis"
         subtitle="Contas a receber por faixa"
-        iconColor="var(--accent-warm)"
+        iconColor="var(--chart-6)"
       />
 
-      <div style={{ marginBottom: 12 }}>
-        <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--neutral-500)' }}>Total a Receber</div>
-        <div className="font-mono" style={{ fontSize: 28, fontWeight: 700, lineHeight: 1.1, color: 'var(--neutral-900)' }}>
-          {formatBRL(total)}
+      <div className="kpi-tile" style={{ marginBottom: 12 }}>
+        <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)' }}>Total a Receber</div>
+        <div className="font-mono kpi-display" style={{ color: 'var(--txt-main)' }}>
+          {formatCompactBRL(total)}
         </div>
       </div>
 
       {/* Stacked horizontal bar */}
-      <div className="flex overflow-hidden" style={{ height: 16, borderRadius: 8, marginBottom: 16, backgroundColor: 'var(--neutral-200)' }}>
+      <div className="flex overflow-hidden" style={{ height: 16, borderRadius: 8, marginBottom: 16, backgroundColor: 'var(--str-default)' }}>
         {arAgingData.map((item) => (
           <div
             key={item.range}
@@ -47,7 +47,7 @@ export function ArAgingCard({ delay = 0 }: ArAgingCardProps) {
               backgroundColor: item.color,
               transition: 'width 0.5s ease-out',
             }}
-            title={`${item.range}: ${formatBRL(item.value)}`}
+            title={`${item.range}: ${formatCompactBRL(item.value)}`}
           />
         ))}
       </div>
@@ -58,10 +58,10 @@ export function ArAgingCard({ delay = 0 }: ArAgingCardProps) {
           <div key={item.range} className="flex items-center justify-between">
             <div className="flex items-center" style={{ gap: 8 }}>
               <div style={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: item.color }} />
-              <span style={{ fontSize: 14, fontWeight: 400, lineHeight: 1.5, color: 'var(--neutral-700)' }}>{item.range}</span>
+              <span style={{ fontSize: 14, fontWeight: 400, lineHeight: 1.5, color: 'var(--txt-main)' }}>{item.range}</span>
             </div>
-            <span className="font-mono" style={{ fontSize: 12, fontWeight: 500, color: 'var(--neutral-900)' }}>
-              {formatBRL(item.value)}
+            <span className="font-mono" style={{ fontSize: 12, fontWeight: 500, color: 'var(--txt-main)' }}>
+              {formatCompactBRL(item.value)}
             </span>
           </div>
         ))}
@@ -76,7 +76,7 @@ export function ArAgingCard({ delay = 0 }: ArAgingCardProps) {
               tick={axisValueTickStyle}
               axisLine={false}
               tickLine={false}
-              tickFormatter={(v: number) => `${(v / 1_000_000).toFixed(1)}M`}
+              tickFormatter={(v: number) => formatCompactNumber(v)}
             />
             <YAxis
               type="category"
@@ -87,8 +87,8 @@ export function ArAgingCard({ delay = 0 }: ArAgingCardProps) {
               width={70}
             />
             <Tooltip
-              contentStyle={tooltipStyle}
-              formatter={(value?: number) => [formatBRL(value ?? 0), 'Valor']}
+              {...tooltipProps}
+              formatter={(value?: number) => [formatCompactBRL(value ?? 0), 'Valor']}
             />
             <Bar dataKey="value" radius={[0, 4, 4, 0]} animationDuration={600} animationEasing="ease-in-out">
               {arAgingData.map((entry, index) => (
