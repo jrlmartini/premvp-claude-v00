@@ -10,7 +10,7 @@ import {
 import { Card, CardHeader } from '../ui/Card'
 import { Badge } from '../ui/Badge'
 import { waterTreatmentMetrics } from '../../data/mockData'
-import { formatNumber, formatPercent } from '../../lib/utils'
+import { formatCompactNumber, formatPercent } from '../../lib/utils'
 import { tooltipProps, axisTickStyle } from '../../lib/chartStyles'
 
 interface WaterTreatmentCardProps {
@@ -34,7 +34,7 @@ export function WaterTreatmentCard({ delay = 0 }: WaterTreatmentCardProps) {
             <span style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)' }}>Volume (m³)</span>
           </div>
           <div className="font-mono kpi-value" style={{ color: 'var(--txt-main)' }}>
-            {formatNumber(waterTreatmentMetrics.volumeProcessed)}
+            {formatCompactNumber(waterTreatmentMetrics.volumeProcessed)}
           </div>
         </div>
 
@@ -58,7 +58,7 @@ export function WaterTreatmentCard({ delay = 0 }: WaterTreatmentCardProps) {
           </div>
         </div>
 
-        <div style={{ padding: 10, borderRadius: 8, backgroundColor: waterTreatmentMetrics.alerts > 0 ? 'rgb(228 87 87 / 20%)' : 'var(--bg-main)' }}>
+        <div style={{ padding: 10, borderRadius: 8, backgroundColor: waterTreatmentMetrics.alerts > 0 ? 'var(--bg-destructive)' : 'var(--bg-main)', border: waterTreatmentMetrics.alerts > 0 ? '0.5px solid var(--str-destructive)' : '0.5px solid var(--str-default)' }}>
           <div className="flex items-center" style={{ gap: 6, marginBottom: 4 }}>
             <AlertCircle size={16} strokeWidth={1.5} style={{ color: waterTreatmentMetrics.alerts > 0 ? 'var(--st-danger)' : 'var(--txt-secondary)' }} />
             <span style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)' }}>Alertas</span>
@@ -87,7 +87,7 @@ export function WaterTreatmentCard({ delay = 0 }: WaterTreatmentCardProps) {
             <YAxis hide />
             <Tooltip
               {...tooltipProps}
-              formatter={(value?: number) => [`${formatNumber(value ?? 0)} m³`, 'Volume']}
+              formatter={(value?: number) => [`${formatCompactNumber(value ?? 0)} m³`, 'Volume']}
             />
             <Area
               type="monotone"

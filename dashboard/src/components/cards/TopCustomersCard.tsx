@@ -43,8 +43,6 @@ export function TopCustomersCard({ delay = 0 }: TopCustomersCardProps) {
                     fontSize: 12,
                     fontWeight: 500,
                     lineHeight: 1.4,
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em',
                     color: 'var(--txt-secondary)',
                     paddingBottom: 8,
                     paddingLeft: 8,
@@ -64,12 +62,20 @@ export function TopCustomersCard({ delay = 0 }: TopCustomersCardProps) {
                   key={customer.rank}
                   style={{
                     backgroundColor: i % 2 === 0 ? 'var(--bg-main)' : 'var(--bg-card)',
-                    borderBottom: '1px solid var(--str-default)',
+                    borderBottom: '0.5px solid var(--str-default)',
+                    borderLeft: '0.5px solid transparent',
+                    borderRight: '0.5px solid transparent',
                     height: 44,
-                    transition: 'background-color 0.15s ease',
+                    transition: 'border-color 0.15s ease',
                   }}
-                  onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-main)' }}
-                  onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = i % 2 === 0 ? 'var(--bg-main)' : 'var(--bg-card)' }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderLeft = '1px solid var(--str-hover)'
+                    e.currentTarget.style.borderRight = '1px solid var(--str-hover)'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderLeft = '0.5px solid transparent'
+                    e.currentTarget.style.borderRight = '0.5px solid transparent'
+                  }}
                 >
                   <td style={{ padding: '0 8px', fontSize: 12, fontWeight: 500, color: 'var(--txt-secondary)' }}>
                     {customer.rank}

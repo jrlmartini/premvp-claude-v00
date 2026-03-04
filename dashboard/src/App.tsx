@@ -39,18 +39,52 @@ function App() {
 
   const [userCollapsed, setUserCollapsed] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [isKioskMode, setIsKioskMode] = useState(false)
+
+  useEffect(() => {
+    const syncFullscreenState = () => {
+      setIsKioskMode(Boolean(document.fullscreenElement))
+    }
+
+    document.addEventListener('fullscreenchange', syncFullscreenState)
+    return () => document.removeEventListener('fullscreenchange', syncFullscreenState)
+  }, [])
+
+  const handleToggleKioskMode = useCallback(async () => {
+    try {
+      if (!document.fullscreenElement) {
+        await document.documentElement.requestFullscreen()
+      } else {
+        await document.exitFullscreen()
+      }
+    } catch (error) {
+      console.error('Não foi possível alternar o modo kiosk.', error)
+    }
+  }, [])
+
+  useEffect(() => {
+    const handleShortcut = (event: KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && event.shiftKey && event.key.toLowerCase() === 'k') {
+        event.preventDefault()
+        void handleToggleKioskMode()
+      }
+    }
+
+    window.addEventListener('keydown', handleShortcut)
+    return () => window.removeEventListener('keydown', handleShortcut)
+  }, [handleToggleKioskMode])
 
   // lg: auto-collapse, md/sm: hidden
   const collapsed = isMobile || bp === 'lg' || userCollapsed
-  const sidebarWidth = isMobile ? 0 : (collapsed ? 72 : 260)
+  const sidebarWidth = isMobile || isKioskMode ? 0 : (collapsed ? 72 : 260)
 
   const handleToggle = useCallback(() => {
-    if (isMobile) {
+    if (isMobile || isKioskMode) {
       setMobileOpen((p) => !p)
     } else {
       setUserCollapsed((p) => !p)
     }
-  }, [isMobile])
+  }, [isMobile, isKioskMode])
 
   // Grid columns: xl/lg=4, md=2, sm=1
   const cols = bp === 'sm' ? 1 : bp === 'md' ? 2 : 4
@@ -58,15 +92,21 @@ function App() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-main)' }}>
-      <Sidebar
-        collapsed={isMobile ? false : collapsed}
-        onToggle={handleToggle}
-        mobileOpen={mobileOpen}
-        onMobileClose={() => setMobileOpen(false)}
-      />
+      {!isKioskMode && (
+        <Sidebar
+          collapsed={isMobile ? false : collapsed}
+          onToggle={handleToggle}
+          mobileOpen={mobileOpen}
+          onMobileClose={() => setMobileOpen(false)}
+        />
+      )}
 
       <div style={{ marginLeft: sidebarWidth, transition: 'margin-left 0.3s ease' }}>
-        <Header onMenuToggle={handleToggle} />
+        <Header
+          onMenuToggle={handleToggle}
+          isKioskMode={isKioskMode}
+          onToggleKioskMode={() => void handleToggleKioskMode()}
+        />
 
         <main style={{ padding: 24 }}>
           <div
@@ -74,7 +114,7 @@ function App() {
               display: 'grid',
               gridTemplateColumns: `repeat(${cols}, 1fr)`,
               gap: 24,
-              maxWidth: 1440,
+              maxWidth: isKioskMode ? '100%' : 1440,
               margin: '0 auto',
             }}
           >
@@ -98,14 +138,16 @@ function App() {
           </div>
         </main>
 
-        <footer
-          className="text-center"
-          style={{ padding: '16px 20px', borderTop: '0.5px solid var(--str-default)' }}
-        >
-          <span style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)' }}>
-            Conatus Environmental Technologies &copy; {new Date().getFullYear()} — Painel Executivo v1.0
-          </span>
-        </footer>
+        {!isKioskMode && (
+          <footer
+            className="text-center"
+            style={{ padding: '16px 20px', borderTop: '0.5px solid var(--str-default)' }}
+          >
+            <span style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)' }}>
+              Conatus Environmental Technologies &copy; {new Date().getFullYear()} — Painel Executivo v1.0
+            </span>
+          </footer>
+        )}
       </div>
     </div>
   )

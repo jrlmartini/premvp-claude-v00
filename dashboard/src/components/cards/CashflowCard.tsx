@@ -28,12 +28,12 @@ export function CashflowCard({ delay = 0 }: CashflowCardProps) {
       />
 
       {/* KPIs */}
-      <div className="grid grid-cols-1 lg:grid-cols-2" style={{ gap: 12, marginBottom: 16 }}>
+      <div className="grid grid-cols-1" style={{ gap: 12, marginBottom: 16 }}>
         <div className="kpi-tile" style={{ padding: 10, borderRadius: 8, backgroundColor: 'var(--bg-main)' }}>
           <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)', marginBottom: 4 }}>
             Geração MTD
           </div>
-          <div className="flex items-center" style={{ color: 'var(--st-success)', gap: 4, minWidth: 0 }}>
+          <div className="flex items-center" style={{ color: 'var(--st-success)', gap: 6, minWidth: 0 }}>
             <ArrowUpRight size={16} strokeWidth={1.5} className="kpi-icon" />
             <span className="font-mono kpi-value" style={{ color: 'var(--st-success)' }}>
               {formatCompactBRL(operationalCashflow.mtd.net)}
@@ -44,7 +44,7 @@ export function CashflowCard({ delay = 0 }: CashflowCardProps) {
           <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)', marginBottom: 4 }}>
             Geração YTD
           </div>
-          <div className="flex items-center" style={{ color: 'var(--st-success)', gap: 4, minWidth: 0 }}>
+          <div className="flex items-center" style={{ color: 'var(--st-success)', gap: 6, minWidth: 0 }}>
             <ArrowUpRight size={16} strokeWidth={1.5} className="kpi-icon" />
             <span className="font-mono kpi-value" style={{ color: 'var(--st-success)' }}>
               {formatCompactBRL(operationalCashflow.ytd.net)}
@@ -54,7 +54,7 @@ export function CashflowCard({ delay = 0 }: CashflowCardProps) {
       </div>
 
       {/* Inflow / Outflow detail */}
-      <div className="grid grid-cols-1 lg:grid-cols-2" style={{ gap: 12, marginBottom: 16 }}>
+      <div className="grid grid-cols-1" style={{ gap: 12, marginBottom: 16 }}>
         <div className="flex items-center justify-between" style={{ gap: 8, minWidth: 0 }}>
           <div className="flex items-center" style={{ gap: 8, minWidth: 0 }}>
             <ArrowUpRight size={16} strokeWidth={1.5} className="kpi-icon" style={{ color: 'var(--st-success)' }} />
