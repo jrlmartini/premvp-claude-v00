@@ -1,256 +1,325 @@
-# Conatus Environmental Technologies — Design System
+# Conatus Executive Dashboard Design System (Single Source of Truth)
 
-## 1. Brand Identity
+**Product:** Conatus Environmental Technologies — Executive / Board Dashboard
 
-### Mission
-Conatus Environmental Technologies pioneers the future of water treatment through innovative IoT-enabled solutions, reducing the environmental impact of industry and agribusiness.
+**Mode:** Online dashboard + **Kiosk mode** (always-on, big screens)
 
-### Brand Values
-- **Innovation** — Technology-driven solutions
-- **Sustainability** — Environmental responsibility
-- **Precision** — Data-driven decision making
-- **Trust** — Transparency and reliability
+**Component library:** shadcn/ui (Tailwind)
 
----
+**Visual style:** clean • minimalist • sleek • **no gradients** • no “AI-looking” effects
 
-## 2. Color Palette
+**Font:** Google Fonts **Outfit**
 
-### Primary Colors
-| Token               | Hex       | Usage                                      |
-|---------------------|-----------|---------------------------------------------|
-| `--primary`         | `#0B6E4F` | Primary actions, key metrics, headers        |
-| `--primary-light`   | `#14A676` | Hover states, positive indicators            |
-| `--primary-dark`    | `#084C37` | Active states, dark accents                  |
-
-### Secondary Colors
-| Token               | Hex       | Usage                                      |
-|---------------------|-----------|---------------------------------------------|
-| `--secondary`       | `#1B4965` | Secondary actions, navigation, charts        |
-| `--secondary-light` | `#2D6A8F` | Chart fills, secondary highlights            |
-| `--secondary-dark`  | `#0F2D3D` | Deep backgrounds, footer                     |
-
-### Accent Colors
-| Token               | Hex       | Usage                                      |
-|---------------------|-----------|---------------------------------------------|
-| `--accent`          | `#62B6CB` | Informational elements, links                |
-| `--accent-warm`     | `#F4A261` | Warnings, attention elements                 |
-| `--accent-danger`   | `#E63946` | Errors, negative indicators, alerts          |
-
-### Neutral Colors
-| Token               | Hex       | Usage                                      |
-|---------------------|-----------|---------------------------------------------|
-| `--neutral-50`      | `#F8FAFB` | Page background                              |
-| `--neutral-100`     | `#EEF2F5` | Card backgrounds, table stripes              |
-| `--neutral-200`     | `#D8DFE5` | Borders, dividers                            |
-| `--neutral-300`     | `#B0BEC5` | Disabled states, placeholders                |
-| `--neutral-500`     | `#607D8B` | Secondary text, labels                       |
-| `--neutral-700`     | `#37474F` | Body text                                    |
-| `--neutral-900`     | `#1A2127` | Headings, primary text                       |
-
-### Semantic Colors
-| Token               | Hex       | Usage                                      |
-|---------------------|-----------|---------------------------------------------|
-| `--success`         | `#14A676` | Positive values, growth indicators           |
-| `--warning`         | `#F4A261` | Caution, moderate alerts                     |
-| `--danger`          | `#E63946` | Negative values, critical alerts             |
-| `--info`            | `#62B6CB` | Informational badges, tooltips               |
+**Theme:** Dark-first (this document defines the canonical dark theme)
 
 ---
 
-## 3. Typography
+## 0) Design principles (non-negotiables)
 
-### Font Family
-- **Primary:** `Inter` — Used for all UI text
-- **Monospace:** `JetBrains Mono` — Used for numerical data, KPIs, financial figures
-
-### Type Scale
-| Level       | Size    | Weight   | Line Height | Usage                        |
-|-------------|---------|----------|-------------|-------------------------------|
-| `display`   | 32px    | 700      | 1.2         | Page titles                   |
-| `h1`        | 24px    | 700      | 1.3         | Section headers               |
-| `h2`        | 20px    | 600      | 1.3         | Card titles                   |
-| `h3`        | 16px    | 600      | 1.4         | Sub-section headers           |
-| `body`      | 14px    | 400      | 1.5         | General text                  |
-| `body-sm`   | 13px    | 400      | 1.5         | Secondary text, descriptions  |
-| `caption`   | 12px    | 500      | 1.4         | Labels, badges, metadata      |
-| `kpi`       | 28px    | 700      | 1.1         | Key performance indicators    |
-| `kpi-sm`    | 20px    | 600      | 1.2         | Secondary KPI values          |
-
-### Numerical Display
-- All financial figures use `JetBrains Mono`
-- Thousands separator: `.` (Brazilian standard)
-- Decimal separator: `,` (Brazilian standard)
-- Currency: `R$` prefix with no space (e.g., `R$1.234.567,89`)
+1. **Clarity > beauty.** Every UI decision must improve scanability and comprehension.
+2. **Consistency > novelty.** Repeat patterns. Avoid decorative variation.
+3. **Data-first hierarchy.** KPIs and trends are the hero; chrome must be quiet.
+4. **Low visual noise.** Prefer spacing + typography + subtle borders over shadows.
+5. **Kiosk-ready UX.** Readable from distance, stable layouts, no “hover-only” affordances.
+6. **Palette integrity.** **Do not create new colors.** Use only the HEX tokens below.
 
 ---
 
-## 4. Spacing & Layout
+## 1) Foundations
 
-### Grid System
-- **Container:** Max width `1440px`, centered
-- **Grid:** 12-column layout with `24px` gutters
-- **Dashboard grid:** CSS Grid with `gap: 20px`
+### 1.1 Typography
 
-### Spacing Scale (based on 4px)
-| Token  | Value | Usage                     |
-|--------|-------|----------------------------|
-| `xs`   | 4px   | Tight inline spacing       |
-| `sm`   | 8px   | Icon gaps, compact padding |
-| `md`   | 12px  | Inner card padding         |
-| `lg`   | 16px  | Standard card padding      |
-| `xl`   | 20px  | Card gaps, section spacing |
-| `2xl`  | 24px  | Section separation         |
-| `3xl`  | 32px  | Major section spacing      |
+**Font family:** Outfit (Google Fonts)
 
-### Card Specifications
-- **Border radius:** `12px`
-- **Background:** `#FFFFFF`
-- **Border:** `1px solid var(--neutral-200)`
-- **Shadow:** `0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)`
-- **Shadow (hover):** `0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04)`
-- **Padding:** `20px`
-- **Header padding-bottom:** `16px`
-- **Transition:** `all 0.2s ease`
+**Font feature:** enable `tabular-nums` for all numeric KPIs, tables, and axis values.
+
+| Style | Weight | Size (px) | Usage |
+| --- | --- | --- | --- |
+| Display | Bold | 30 | KPI values, hero numbers |
+| Heading 1 | SemiBold | 24 | Page titles, section headers |
+| Heading 2 | SemiBold | 20 | Card titles, panel headers |
+| Body | Regular | 16 | Default text, labels, table cells |
+
+**Type rules**
+
+- Always keep **KPI numbers** in Display style (30) and **labels** in Body (16) or smaller variants from Body via opacity/secondary color (no new sizes required).
+- Use **Sentence case** for titles (avoid ALL CAPS).
+- Use **max 2 lines** for card titles; truncate with ellipsis after that.
 
 ---
 
-## 5. Components
+## 2) Color system (canonical tokens)
 
-### KPI Cards
-```
-┌─────────────────────────────────┐
-│ [Icon]  Card Title              │
-│         Subtitle / Period       │
-│                                 │
-│  R$1.234.567,89                │
-│  ▲ 12,5% vs meta              │
-│                                 │
-│  [Sparkline / Mini Chart]       │
-└─────────────────────────────────┘
-```
-- Icon: 20×20px, color matches card theme
-- Title: `h3` typography
-- KPI value: `kpi` typography, `--neutral-900`
-- Comparison: `caption` typography, colored by sentiment (`--success` / `--danger`)
-- Mini chart height: `48px`
+> **Do not add colors. Do not adjust hues. Do not introduce gradients.**
+> 
+> 
+> If transparency is needed, apply opacity at implementation level (Tailwind opacity utilities), not by inventing new HEX values.
+> 
 
-### Data Tables
-- Header: `caption` typography, uppercase, `--neutral-500`
-- Rows: `body` typography, `--neutral-700`
-- Row height: `44px`
-- Alternating rows: `--neutral-50` / `#FFFFFF`
-- Hover: `--neutral-100`
-- Border: Bottom only, `1px solid var(--neutral-200)`
+### 2.1 Core UI tokens
 
-### Charts
-- Font: `Inter` for labels, `JetBrains Mono` for values
-- Grid lines: `--neutral-200`, dashed, `1px`
-- Color sequence (for series):
-  1. `#0B6E4F` (primary)
-  2. `#1B4965` (secondary)
-  3. `#62B6CB` (accent)
-  4. `#14A676` (primary-light)
-  5. `#F4A261` (accent-warm)
-  6. `#2D6A8F` (secondary-light)
-- Tooltip: White bg, `12px` border-radius, shadow matching card shadow
-- Animation: Ease-in-out, 600ms entry
-
-### Heatmap (RFM Matrix)
-- Cell size: Flexible, minimum `48px`
-- Color gradient (low → high):
-  - `#EEF2F5` → `#62B6CB` → `#1B4965` → `#0B6E4F` → `#084C37`
-- Cell border-radius: `6px`
-- Gap between cells: `3px`
-- Labels: `caption` typography
-- Values inside cells: `body-sm` typography, white text on dark cells
-
-### Badges / Tags
-- Border-radius: `6px`
-- Padding: `2px 8px`
-- Font: `caption` typography
-- Variants:
-  - **Success:** bg `#E8F5E9`, text `--success`
-  - **Warning:** bg `#FFF3E0`, text `--warning`
-  - **Danger:** bg `#FFEBEE`, text `--danger`
-  - **Info:** bg `#E0F4F8`, text `--info`
-  - **Neutral:** bg `--neutral-100`, text `--neutral-500`
+| Token | HEX | Primary usage |
+| --- | --- | --- |
+| bg-main | #03131e | App/page background |
+| bg-card | #071724 | Card surfaces, panels |
+| bg-modal | #214058 | Modal shell / overlay surfaces (see modal rules) |
+| bg-button | #275fc1 | Primary action background |
+| bg-destructive | #e45757 | Destructive actions + destructive banners |
+| str-default | #214059 | Default borders/dividers *(canonical spelling: `str-default` — keep HEX)* |
+| str-hover | #275fc1 | Hover/focus border highlight |
+| str-disabled | #8f9da7 | Disabled borders |
+| str-destructive | #d32f2f | Destructive borders |
+| txt-main | #f2f2f2 | Primary text on dark surfaces |
+| txt-secondary | #c1cdd9 | Secondary text (supporting info) |
+| txt-muted | #8f9da7 | Muted/disabled text |
+| txt-modal | #03131e | **Dark text** for high-chroma/light-ish surfaces (see accessibility rules) |
 
 ---
 
-## 6. Navigation
+## 3) Layout & spacing
 
-### Sidebar
-- Width: `260px` (expanded), `72px` (collapsed)
-- Background: `--secondary-dark` (`#0F2D3D`)
-- Active item: `--primary` background with `4px` left border
-- Text: White, `body` typography
-- Icons: `20px`, white, `0.7` opacity (inactive), `1.0` (active)
-- Transition: `width 0.3s ease`
+### 3.1 Grid & alignment (dashboard)
 
-### Header Bar
-- Height: `64px`
-- Background: `#FFFFFF`
-- Border-bottom: `1px solid var(--neutral-200)`
-- Logo area: Left-aligned
-- User menu: Right-aligned
-- Shadow: `0 1px 2px rgba(0,0,0,0.04)`
+- Use an **8px spacing system** (8, 16, 24, 32, 40…).
+- Prefer **12-column layout** for desktop dashboards:
+    - Gutters: 24px
+    - Card padding: 16–24px (use 24px for KPI-heavy cards)
+- Align KPI numbers to the **baseline** where possible; align multiple KPI values using `tabular-nums`.
 
----
+### 3.2 Kiosk mode rules
 
-## 7. Animations & Interactions
-
-### Entry Animations
-- Cards: Fade-in + slide-up, `400ms`, staggered by `80ms`
-- Numbers: Count-up animation, `800ms`, ease-out
-- Charts: Progressive draw, `600ms`, ease-in-out
-
-### Hover States
-- Cards: Elevate shadow, `200ms` transition
-- Buttons: Slight scale (`1.02`), `150ms`
-- Table rows: Background color transition, `150ms`
-
-### Micro-interactions
-- KPI arrows: Gentle pulse on positive values
-- Progress bars: Smooth fill animation on load
-- Tooltips: Fade-in `150ms`, slight scale from `0.95`
+- **Minimum readable size at distance:** KPI value (Display 30) must remain visually dominant.
+- Avoid interactions that require precision:
+    - Prefer big targets (≥ 40px height for clickable rows/buttons).
+- Avoid “hover-only” information. If something matters, it must be visible or accessible via click/focus.
 
 ---
 
-## 8. Responsive Breakpoints
+## 4) Surfaces, borders, radii
 
-| Breakpoint | Width     | Layout                        |
-|------------|-----------|-------------------------------|
-| `xl`       | ≥1440px   | Full 12-column grid           |
-| `lg`       | ≥1024px   | 12-column, sidebar collapsed  |
-| `md`       | ≥768px    | 2-column card grid            |
-| `sm`       | <768px    | Single column, stacked cards  |
+### 4.1 Radii (canonical)
 
----
+- `radius-sm`: **8px** (chips, buttons)
+- `radius-md`: **12px** (cards)
+- `radius-lg`: **16px** (modals)
 
-## 9. Iconography
+### 4.2 Borders (separation strategy)
 
-- **Icon set:** Lucide React (consistent with shadcn/ui)
-- **Size:** `20px` default, `16px` inline, `24px` headers
-- **Stroke width:** `1.5px`
-- **Color:** Inherits from parent text color unless specified
+- Prefer borders instead of shadows.
+- Default border: **0.5px** using `str-default`.
+- Highlight border (hover/focus): **1px** using `str-hover`.
 
 ---
 
-## 10. Accessibility
+## 5) Component states (global)
 
-- Minimum contrast ratio: `4.5:1` for body text
-- Focus indicators: `2px solid var(--primary)` with `2px` offset
-- All interactive elements: Minimum `44px` touch target
-- ARIA labels on all icon-only buttons
-- Reduced motion: Respect `prefers-reduced-motion` media query
+> Applies to all interactive components: buttons, tabs, inputs, selectable cards, table rows.
+> 
+
+### 5.1 Canonical states
+
+**Default**
+
+- Background: `bg-card`
+- Border: `str-default` @ 0.5px
+- Text: `txt-main`
+
+**Hover**
+
+- Border: `str-hover` @ 1px
+- Background remains `bg-card` (no glow, no gradients)
+
+**Active / Pressed**
+
+- Border: `str-hover` @ 0.5px
+- Background remains `bg-card`
+
+**Selected**
+
+- Border: `str-hover` @ 1px *(use hover color to unify selection language)*
+- Background: `bg-card`
+- Text: `txt-main`
+
+**Disabled**
+
+- Border: `str-disabled` @ 0.5px
+- Text: `txt-muted`
+- Reduce emphasis (opacity at implementation level)
+
+### 5.2 Focus-visible (keyboard)
+
+- Required for accessibility and kiosk navigation.
+- Use a **1px border** in `str-hover` plus an **outer ring** using the same `str-hover` color (implementation via ring utilities; do not introduce new colors).
 
 ---
 
-## 11. Language & Localization
+## 6) Buttons (shadcn/ui mapping + canonical styling)
 
-- **Primary language:** Português (PT-BR)
-- **Date format:** `DD/MM/YYYY`
-- **Number format:** `1.234.567,89`
-- **Currency:** `R$ 1.234.567,89`
-- **Percentage:** `12,5%`
-- **Month abbreviations:** Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez
+> Keep buttons visually quiet; primary is the only strong color block.
+> 
+
+### 6.1 Button variants
+
+**Primary**
+
+- Background: `bg-button`
+- Text: `txt-main`
+- Border: none (default)
+- Hover: add 1px border `str-hover` *(same HEX as bg-button; gives crisp edge)*
+
+**Secondary (Outline)**
+
+- Background: `bg-card`
+- Text: `txt-main`
+- Border: `str-default` @ 0.5px
+- Hover: border `str-hover` @ 1px
+
+**Ghost**
+
+- Background: `bg-card`
+- Text: `txt-secondary` (default), `txt-main` on hover is allowed
+- Border: `str-disabled` @ 0.5px (subtle)
+- Hover: border `str-disabled` @ 1px (optional)
+
+**Destructive**
+
+- Background: `bg-destructive`
+- Text: `txt-main`
+- Border: none (default)
+- Hover: border `str-destructive` @ 1px
+
+---
+
+## 7) Modals & overlays
+
+### 7.1 Modal structure (recommended, within existing palette)
+
+To avoid low-contrast combinations:
+
+- **Backdrop / overlay layer:** `bg-modal` (as the dim layer behind the dialog)
+- **Dialog surface:** `bg-card`
+- **Dialog text:** `txt-main`
+
+### 7.2 When to use `txt-modal`
+
+Use `txt-modal` **only** when the background is sufficiently bright/high-chroma (e.g., destructive/status pills).
+
+Do **not** set `txt-modal` as the default text on `bg-modal` or `bg-card`.
+
+---
+
+## 8) Data visualization system (charts)
+
+### 8.1 Categorical palette (fixed order)
+
+Use these colors **in order** for series/categories. Do not reorder unless you are preserving meaning across screens.
+
+| Token | HEX | Meaning / usage |
+| --- | --- | --- |
+| chart-1 | #275fc1 | Default / primary series (also brand-primary) |
+| chart-2 | #19c2b8 | Secondary series |
+| chart-3 | #2aa9e0 | Tertiary series |
+| chart-4 | #22A87e | Positive/efficiency series (if semantically meaningful) |
+| chart-5 | #7ad74a | Attention/ contrast series, positive |
+| chart-6 | #f2c14e | Attention/contrast series, neutral |
+| chart-7 | #e45757 | Attention/ contrast series, negative |
+| chart-other | #B6c2D1 | “Other” bucket, remainder categories |
+
+**Rules**
+
+- Default line charts: start with `chart-1`.
+- Multi-series comparisons: `chart-1` vs `chart-2` is the default pairing.
+- If categories exceed 7: show top N, group rest as **Other** (`chart-other`).
+
+### 8.2 Extended chart colors (only when needed)
+
+| Token | HEX | Usage |
+| --- | --- | --- |
+| chart-9 | #d95ad0 | Extra series |
+| chart-10 | #8a5cf6 | Extra series |
+| chart-11 | #6b7dff | Extra series |
+| chart-12 | #b71c71 | Extra series |
+
+### 8.3 Status colors (for KPI state, thresholds, alerts)
+
+| Token | HEX | Usage |
+| --- | --- | --- |
+| st-success | #34d399 | Success indicator, positive, efficiency, gains |
+| st-warning | #fbbf24 | Warning indicator, close to goal, threshold |
+| st-danger | #fb7185 | Danger indicator, negative, losses |
+
+**Status usage rules**
+
+- Prefer using status colors as **small accents** (icons, left border, dot markers), not large filled backgrounds.
+- If you must use a filled status pill/background, use `txt-modal` for text on top.
+
+### 8.4 Chart styling (dark dashboard rules)
+
+- Axes/labels: `txt-secondary`
+- Gridlines: `str-default` with reduced opacity (implementation-level opacity, no new HEX)
+- Data labels: `txt-main` only when essential; otherwise omit to reduce clutter.
+- Tooltips:
+    - **Tooltip = small contextual popup** shown when hovering/focusing a data point; it shows the exact value(s) and label/date.
+    - Tooltip container: `bg-card` with border `str-default`
+    - Tooltip text: `txt-main` + `txt-secondary` for labels
+
+---
+
+## 9) Tables, filters, and density
+
+### 9.1 Tables (executive-friendly)
+
+- Use zebra striping if strictly needed for readability; alternate between bg-card and bg-main.
+- Header text: `txt-secondary`
+- Cell text: `txt-main`
+- Row hover: border highlight `str-hover` (avoid background tinting)
+
+### 9.2 Filters
+
+- Filters must be compact and predictable:
+    - Date range, unit/site, business line, segment.
+- Default filter components must come from shadcn (Select, Popover, Calendar, Command).
+
+---
+
+## 10) shadcn/ui token mapping (implementation guidance)
+
+> shadcn commonly uses CSS variables. Keep the **source palette** exactly as defined above.
+> 
+
+Recommended mapping:
+
+- `-background` → `bg-main`
+- `-card` → `bg-card`
+- `-popover` → `bg-card` (or `bg-modal` only for special overlays)
+- `-primary` → `bg-button`
+- `-primary-foreground` → `txt-main`
+- `-destructive` → `bg-destructive`
+- `-destructive-foreground` → `txt-modal` (contrast-safe)
+- `-border` → `str-default`
+- `-input` → `str-default`
+- `-ring` → `str-hover`
+- `-foreground` → `txt-main`
+- `-muted-foreground` → `txt-muted`
+
+---
+
+## 11) Quality & consistency checklist (use before shipping screens)
+
+- [ ]  No gradients, glows, glass effects, or decorative shadows.
+- [ ]  Only approved HEX tokens are used (no new colors).
+- [ ]  KPI numbers use Display (30) and tabular numbers.
+- [ ]  Borders are consistent: default 0.5px, hover/selected 1px.
+- [ ]  No critical information is hover-only (kiosk-safe).
+- [ ]  Charts use the palette order; “Other” uses `chart-other`.
+
+---
+
+## 12) Known issues / intentional constraints (do not “fix” by adding colors)
+
+1. `txt-modal` is not suitable as default modal text on dark surfaces; it is reserved for high-chroma/filled backgrounds to preserve contrast.
+2. Any alpha/transparency must be applied via opacity utilities, not by inventing new HEX colors.
+
+---
+
+**End of Design System**
