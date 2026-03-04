@@ -100,7 +100,7 @@ export function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose }: Side
                 style={{
                   width: '100%',
                   gap: 12,
-                  padding: '10px 12px',
+                  padding: '12px 12px',
                   borderRadius: 8,
                   backgroundColor: item.active ? 'var(--primary)' : 'transparent',
                   borderLeft: item.active ? '4px solid white' : '4px solid transparent',
@@ -132,7 +132,7 @@ export function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose }: Side
                       color: 'white',
                       opacity: item.active ? 1 : 0.7,
                       fontSize: 14,
-                      fontWeight: item.active ? 500 : 400,
+                      fontWeight: 400,
                       lineHeight: 1.5,
                     }}
                   >

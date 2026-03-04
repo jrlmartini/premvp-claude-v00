@@ -41,7 +41,7 @@ interface CardHeaderProps {
 export function CardHeader({ icon: Icon, title, subtitle, iconColor = 'var(--primary)', action }: CardHeaderProps) {
   return (
     <div className="flex items-start justify-between" style={{ paddingBottom: 16 }}>
-      <div className="flex items-center" style={{ gap: 10 }}>
+      <div className="flex items-center" style={{ gap: 8 }}>
         <div
           className="flex items-center justify-center"
           style={{
@@ -54,21 +54,21 @@ export function CardHeader({ icon: Icon, title, subtitle, iconColor = 'var(--pri
           <Icon size={20} strokeWidth={1.5} style={{ color: iconColor }} />
         </div>
         <div>
-          <h2
+          <h3
             style={{
-              fontSize: 20,
+              fontSize: 16,
               fontWeight: 600,
-              lineHeight: 1.3,
+              lineHeight: 1.4,
               color: 'var(--neutral-900)',
               margin: 0,
             }}
           >
             {title}
-          </h2>
+          </h3>
           {subtitle && (
             <span
               style={{
-                fontSize: 13,
+                fontSize: 14,
                 fontWeight: 400,
                 lineHeight: 1.5,
                 color: 'var(--neutral-500)',
