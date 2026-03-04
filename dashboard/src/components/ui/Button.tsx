@@ -20,7 +20,7 @@ const variantStyles: Record<Variant, CSSProperties> = {
   },
   ghost: {
     backgroundColor: 'var(--bg-card)',
-    color: 'var(--txt-secondary)',
+    color: 'var(--txt-muted)',
     border: '0.5px solid var(--str-disabled)',
   },
   destructive: {
@@ -49,19 +49,12 @@ export function Button({ variant = 'primary', children, style, ...props }: Butto
         if (variant === 'primary' || variant === 'secondary') {
           e.currentTarget.style.border = '1px solid var(--str-hover)'
         }
-        if (variant === 'ghost') {
-          e.currentTarget.style.border = '1px solid var(--str-disabled)'
-          e.currentTarget.style.color = 'var(--txt-main)'
-        }
         if (variant === 'destructive') {
           e.currentTarget.style.border = '1px solid var(--str-destructive)'
         }
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.border = variantStyles[variant].border as string
-        if (variant === 'ghost') {
-          e.currentTarget.style.color = 'var(--txt-secondary)'
-        }
       }}
     >
       {children}

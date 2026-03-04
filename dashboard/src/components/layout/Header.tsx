@@ -1,10 +1,12 @@
-import { Bell, Search, User, Calendar, Menu } from 'lucide-react'
+import { Bell, Search, User, Calendar, Menu, Maximize2, Minimize2 } from 'lucide-react'
 
 interface HeaderProps {
   onMenuToggle: () => void
+  isKioskMode: boolean
+  onToggleKioskMode: () => void
 }
 
-export function Header({ onMenuToggle }: HeaderProps) {
+export function Header({ onMenuToggle, isKioskMode, onToggleKioskMode }: HeaderProps) {
   const formattedDate = new Date().toLocaleDateString('pt-BR', {
     weekday: 'long',
     day: '2-digit',
@@ -37,6 +39,31 @@ export function Header({ onMenuToggle }: HeaderProps) {
       </div>
 
       <div className="flex items-center" style={{ gap: 16 }}>
+        <button
+          onClick={onToggleKioskMode}
+          className="hidden sm:flex items-center justify-center"
+          style={{
+            minHeight: 44,
+            padding: '0 12px',
+            gap: 8,
+            borderRadius: 8,
+            border: isKioskMode ? '1px solid var(--str-hover)' : '0.5px solid var(--str-default)',
+            backgroundColor: 'var(--bg-card)',
+            cursor: 'pointer',
+          }}
+          aria-label={isKioskMode ? 'Sair do modo kiosk' : 'Ativar modo kiosk'}
+          title={isKioskMode ? 'Sair do modo kiosk (Esc)' : 'Ativar modo kiosk'}
+        >
+          {isKioskMode ? (
+            <Minimize2 size={16} strokeWidth={1.5} style={{ color: 'var(--txt-main)' }} />
+          ) : (
+            <Maximize2 size={16} strokeWidth={1.5} style={{ color: 'var(--txt-secondary)' }} />
+          )}
+          <span style={{ fontSize: 14, fontWeight: 500, color: isKioskMode ? 'var(--txt-main)' : 'var(--txt-secondary)' }}>
+            {isKioskMode ? 'Sair do kiosk' : 'Modo kiosk'}
+          </span>
+        </button>
+
         <div className="hidden sm:flex items-center" style={{ gap: 8, padding: '6px 12px', borderRadius: 8, border: '0.5px solid var(--str-default)', backgroundColor: 'var(--bg-card)' }}>
           <Search size={16} strokeWidth={1.5} style={{ color: 'var(--txt-secondary)' }} />
           <input type="text" placeholder="Buscar..." className="bg-transparent border-none outline-none" style={{ fontSize: 14, color: 'var(--txt-main)', width: 192 }} />
