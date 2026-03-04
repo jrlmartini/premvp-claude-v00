@@ -1,15 +1,10 @@
 # Conatus Executive Dashboard Design System (Single Source of Truth)
 
 **Product:** Conatus Environmental Technologies — Executive / Board Dashboard
-
 **Mode:** Online dashboard + **Kiosk mode** (always-on, big screens)
-
 **Component library:** shadcn/ui (Tailwind)
-
-**Visual style:** clean • minimalist • sleek • **no gradients** • no “AI-looking” effects
-
+**Visual style:** clean • minimalist • sleek • no “AI-looking” effects
 **Font:** Google Fonts **Outfit**
-
 **Theme:** Dark-first (this document defines the canonical dark theme)
 
 ---
@@ -22,6 +17,10 @@
 4. **Low visual noise.** Prefer spacing + typography + subtle borders over shadows.
 5. **Kiosk-ready UX.** Readable from distance, stable layouts, no “hover-only” affordances.
 6. **Palette integrity.** **Do not create new colors.** Use only the HEX tokens below.
+7. **Do not hardcode, use tokens** Use tokens to express semantics of each element
+8. **Subtle animations** are permitted.
+9. **Subtle shadows** are permitted, but can be used in small details
+10. **Subtle gradients** are permitted, but can be used in small details
 
 ---
 
@@ -45,12 +44,31 @@
 - Always keep **KPI numbers** in Display style (30) and **labels** in Body (16) or smaller variants from Body via opacity/secondary color (no new sizes required).
 - Use **Sentence case** for titles (avoid ALL CAPS).
 - Use **max 2 lines** for card titles; truncate with ellipsis after that.
+- **KPI in compact tile (cards with a narrow 1-column layout):** 24px, Bold, tabular-nums.
+- **Inline support value (detail rows):** 20px, SemiBold.
+- On small screens, reduce to **24px (hero)**, **20px (compact)**, and **18px (inline)**.
+
+**Numeric formating**
+Apply to all KPIs, tables, and tooltips:
+
+- **Millions:** use suffix **M** (e.g., `R$ 2,8M`).
+- **Thousands:** use suffix **k** (e.g., `R$ 845,3k`).
+- **< 1,000:** no suffix, no unnecessary decimals (e.g., `934`).
+- **Percentage:** always with **1 decimal place** and `%` (e.g., `17,4%`).
+- **BRL currency:** always with prefix and a space: `R$ `.
+
+**Content rules in cards**
+- Numbers in cards with financial meaning must use compact currency formatting (`R$` + compact value).
+- Operational quantities (e.g., units, volume, counts) must use compact formatting to prevent overflow.
+- Avoid long texts without truncation in high-density areas.
+
+
 
 ---
 
 ## 2) Color system (canonical tokens)
 
-> **Do not add colors. Do not adjust hues. Do not introduce gradients.**
+> **Do not add colors. Do not adjust hues. Use gradients with caution.**
 > 
 > 
 > If transparency is needed, apply opacity at implementation level (Tailwind opacity utilities), not by inventing new HEX values.
@@ -92,6 +110,11 @@
 - Avoid interactions that require precision:
     - Prefer big targets (≥ 40px height for clickable rows/buttons).
 - Avoid “hover-only” information. If something matters, it must be visible or accessible via click/focus.
+- Implement full-screen toggling via the Fullscreen API for continuous operation on TV/monitor.
+- In kiosk mode, hide side navigation and footer to prioritize usable data area.
+- Keep a simple way to exit kiosk mode with an explicit action in the header (and support `Esc`).
+- Recommended operational shortcut: `Ctrl/Cmd + Shift + K`.
+
 
 ---
 
@@ -107,7 +130,7 @@
 
 - Prefer borders instead of shadows.
 - Default border: **0.5px** using `str-default`.
-- Highlight border (hover/focus): **1px** using `str-hover`.
+- Highlight border (hover/focus): **1.5px** using `str-hover`.
 
 ---
 
@@ -126,7 +149,7 @@
 
 **Hover**
 
-- Border: `str-hover` @ 1px
+- Border: `str-hover` @ 1.5px
 - Background remains `bg-card` (no glow, no gradients)
 
 **Active / Pressed**
@@ -165,28 +188,28 @@
 - Background: `bg-button`
 - Text: `txt-main`
 - Border: none (default)
-- Hover: add 1px border `str-hover` *(same HEX as bg-button; gives crisp edge)*
+- Hover: add 1.5px border `str-hover` *(same HEX as bg-button; gives crisp edge)*
 
 **Secondary (Outline)**
 
 - Background: `bg-card`
 - Text: `txt-main`
 - Border: `str-default` @ 0.5px
-- Hover: border `str-hover` @ 1px
+- Hover: border `str-hover` @ 1.5x
 
 **Ghost**
 
 - Background: `bg-card`
 - Text: `txt-secondary` (default), `txt-main` on hover is allowed
 - Border: `str-disabled` @ 0.5px (subtle)
-- Hover: border `str-disabled` @ 1px (optional)
+- Hover: no effect
 
 **Destructive**
 
 - Background: `bg-destructive`
 - Text: `txt-main`
 - Border: none (default)
-- Hover: border `str-destructive` @ 1px
+- Hover: border `str-destructive` @ 1.5px
 
 ---
 
@@ -258,6 +281,8 @@ Use these colors **in order** for series/categories. Do not reorder unless you a
 - Axes/labels: `txt-secondary`
 - Gridlines: `str-default` with reduced opacity (implementation-level opacity, no new HEX)
 - Data labels: `txt-main` only when essential; otherwise omit to reduce clutter.
+- Charts are always centralized in the card
+- Months: Always use months in abbreviation for pt-br (Jan, Fev, Mar, Abr, ... Dez)
 - Tooltips:
     - **Tooltip = small contextual popup** shown when hovering/focusing a data point; it shows the exact value(s) and label/date.
     - Tooltip container: `bg-card` with border `str-default`
@@ -306,12 +331,14 @@ Recommended mapping:
 
 ## 11) Quality & consistency checklist (use before shipping screens)
 
-- [ ]  No gradients, glows, glass effects, or decorative shadows.
 - [ ]  Only approved HEX tokens are used (no new colors).
 - [ ]  KPI numbers use Display (30) and tabular numbers.
 - [ ]  Borders are consistent: default 0.5px, hover/selected 1px.
 - [ ]  No critical information is hover-only (kiosk-safe).
 - [ ]  Charts use the palette order; “Other” uses `chart-other`.
+- [ ] All numbers use M/k compaction when applicable.
+- [ ] All monetary values use `R$ ` + pt-BR format.
+- [ ] No number overflows in cards 
 
 ---
 

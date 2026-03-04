@@ -61,10 +61,10 @@ export function WaterTreatmentCard({ delay = 0 }: WaterTreatmentCardProps) {
         <div style={{ padding: 10, borderRadius: 8, backgroundColor: waterTreatmentMetrics.alerts > 0 ? 'var(--bg-destructive)' : 'var(--bg-main)', border: waterTreatmentMetrics.alerts > 0 ? '0.5px solid var(--str-destructive)' : '0.5px solid var(--str-default)' }}>
           <div className="flex items-center" style={{ gap: 6, marginBottom: 4 }}>
             <AlertCircle size={16} strokeWidth={1.5} style={{ color: waterTreatmentMetrics.alerts > 0 ? 'var(--st-danger)' : 'var(--txt-secondary)' }} />
-            <span style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)' }}>Alertas</span>
+            <span style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: waterTreatmentMetrics.alerts > 0 ? 'var(--txt-modal)' : 'var(--txt-secondary)' }}>Alertas</span>
           </div>
           <div className="flex items-center" style={{ gap: 6 }}>
-            <span className="font-mono kpi-value" style={{ color: waterTreatmentMetrics.alerts > 0 ? 'var(--st-danger)' : 'var(--txt-main)' }}>
+            <span className="font-mono kpi-value" style={{ color: waterTreatmentMetrics.alerts > 0 ? 'var(--txt-modal)' : 'var(--txt-main)' }}>
               {waterTreatmentMetrics.alerts}
             </span>
             {waterTreatmentMetrics.alerts > 0 && (
