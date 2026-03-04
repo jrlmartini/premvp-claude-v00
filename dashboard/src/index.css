@@ -1,123 +1,78 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  --primary: #0B6E4F;
-  --primary-light: #14A676;
-  --primary-dark: #084C37;
-  --secondary: #1B4965;
-  --secondary-light: #2D6A8F;
-  --secondary-dark: #0F2D3D;
-  --accent: #62B6CB;
-  --accent-warm: #F4A261;
-  --accent-danger: #E63946;
-  --neutral-50: #F8FAFB;
-  --neutral-100: #EEF2F5;
-  --neutral-200: #D8DFE5;
-  --neutral-300: #B0BEC5;
-  --neutral-500: #607D8B;
-  --neutral-700: #37474F;
-  --neutral-900: #1A2127;
-  --success: #14A676;
-  --warning: #F4A261;
-  --danger: #E63946;
-  --info: #62B6CB;
+  --bg-main: #03131e;
+  --bg-card: #071724;
+  --bg-modal: #214058;
+  --bg-button: #275fc1;
+  --bg-destructive: #e45757;
+
+  --str-default: #214059;
+  --str-hover: #275fc1;
+  --str-disabled: #8f9da7;
+  --str-destructive: #d32f2f;
+
+  --txt-main: #f2f2f2;
+  --txt-secondary: #c1cdd9;
+  --txt-muted: #8f9da7;
+  --txt-modal: #03131e;
+
+  --chart-1: #275fc1;
+  --chart-2: #19c2b8;
+  --chart-3: #2aa9e0;
+  --chart-4: #22A87e;
+  --chart-5: #7ad74a;
+  --chart-6: #f2c14e;
+  --chart-7: #e45757;
+  --chart-other: #B6c2D1;
+  --chart-9: #d95ad0;
+  --chart-10: #8a5cf6;
+  --chart-11: #6b7dff;
+  --chart-12: #b71c71;
+
+  --st-success: #34d399;
+  --st-warning: #fbbf24;
+  --st-danger: #fb7185;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: var(--neutral-50);
-  color: var(--neutral-700);
+  margin: 0;
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg-main);
+  color: var(--txt-main);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 .font-mono {
-  font-family: 'JetBrains Mono', monospace !important;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
 }
 
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--neutral-100);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--neutral-300);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--neutral-500);
-}
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-card); }
+::-webkit-scrollbar-thumb { background: var(--str-default); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--str-hover); }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(12px); }
+  from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes slideInRight {
-  from { opacity: 0; transform: translateX(-8px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes pulse-soft {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
-
 .animate-fade-in-up {
-  animation: fadeInUp 400ms ease-out forwards;
+  animation: fadeInUp 280ms ease-out forwards;
   opacity: 0;
 }
 
-.animate-slide-in-right {
-  animation: slideInRight 300ms ease-out forwards;
-  opacity: 0;
-}
-
-.animate-pulse-soft {
-  animation: pulse-soft 2s ease-in-out infinite;
-}
-
-/* Button hover — scale(1.02) 150ms per design system */
-button {
-  transition: transform 0.15s ease;
-}
-
-button:hover {
-  transform: scale(1.02);
-}
-
-/* Accessibility — focus indicators per design system */
 *:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-
-button:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-
-input:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
+  outline: none;
+  border-color: var(--str-hover);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--str-hover) 40%, transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-fade-in-up,
-  .animate-slide-in-right {
-    animation: none;
-    opacity: 1;
-  }
-  .animate-pulse-soft {
-    animation: none;
-  }
+  .animate-fade-in-up { animation: none; opacity: 1; }
 }

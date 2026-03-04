@@ -26,18 +26,18 @@ export function ArAgingCard({ delay = 0 }: ArAgingCardProps) {
         icon={Clock}
         title="Aging de Recebíveis"
         subtitle="Contas a receber por faixa"
-        iconColor="var(--accent-warm)"
+        iconColor="var(--chart-6)"
       />
 
       <div style={{ marginBottom: 12 }}>
-        <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--neutral-500)' }}>Total a Receber</div>
-        <div className="font-mono" style={{ fontSize: 28, fontWeight: 700, lineHeight: 1.1, color: 'var(--neutral-900)' }}>
+        <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)' }}>Total a Receber</div>
+        <div className="font-mono" style={{ fontSize: 28, fontWeight: 700, lineHeight: 1.1, color: 'var(--txt-main)' }}>
           {formatBRL(total)}
         </div>
       </div>
 
       {/* Stacked horizontal bar */}
-      <div className="flex overflow-hidden" style={{ height: 16, borderRadius: 8, marginBottom: 16, backgroundColor: 'var(--neutral-200)' }}>
+      <div className="flex overflow-hidden" style={{ height: 16, borderRadius: 8, marginBottom: 16, backgroundColor: 'var(--str-default)' }}>
         {arAgingData.map((item) => (
           <div
             key={item.range}
@@ -58,9 +58,9 @@ export function ArAgingCard({ delay = 0 }: ArAgingCardProps) {
           <div key={item.range} className="flex items-center justify-between">
             <div className="flex items-center" style={{ gap: 8 }}>
               <div style={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: item.color }} />
-              <span style={{ fontSize: 14, fontWeight: 400, lineHeight: 1.5, color: 'var(--neutral-700)' }}>{item.range}</span>
+              <span style={{ fontSize: 14, fontWeight: 400, lineHeight: 1.5, color: 'var(--txt-main)' }}>{item.range}</span>
             </div>
-            <span className="font-mono" style={{ fontSize: 12, fontWeight: 500, color: 'var(--neutral-900)' }}>
+            <span className="font-mono" style={{ fontSize: 12, fontWeight: 500, color: 'var(--txt-main)' }}>
               {formatBRL(item.value)}
             </span>
           </div>

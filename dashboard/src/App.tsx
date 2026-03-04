@@ -56,7 +56,7 @@ function App() {
   const span2 = cols >= 2 ? 'span 2' : 'span 1'
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'var(--neutral-50)' }}>
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-main)' }}>
       <Sidebar
         collapsed={isMobile ? false : collapsed}
         onToggle={handleToggle}
@@ -67,12 +67,12 @@ function App() {
       <div style={{ marginLeft: sidebarWidth, transition: 'margin-left 0.3s ease' }}>
         <Header onMenuToggle={handleToggle} />
 
-        <main style={{ padding: 20 }}>
+        <main style={{ padding: 24 }}>
           <div
             style={{
               display: 'grid',
               gridTemplateColumns: `repeat(${cols}, 1fr)`,
-              gap: 20,
+              gap: 24,
               maxWidth: 1440,
               margin: '0 auto',
             }}
@@ -98,9 +98,9 @@ function App() {
 
         <footer
           className="text-center"
-          style={{ padding: '16px 20px', borderTop: '1px solid var(--neutral-200)' }}
+          style={{ padding: '16px 20px', borderTop: '0.5px solid var(--str-default)' }}
         >
-          <span style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--neutral-500)' }}>
+          <span style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)' }}>
             Conatus Environmental Technologies &copy; {new Date().getFullYear()} — Painel Executivo v1.0
           </span>
         </footer>
