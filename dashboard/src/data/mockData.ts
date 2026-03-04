@@ -164,3 +164,36 @@ export const arAgingData = [
   { range: '61-90 dias', value: 234_000, color: 'var(--chart-7)' },
   { range: '90+ dias', value: 178_000, color: 'var(--str-destructive)' },
 ]
+
+
+export const quickActionsInsights = {
+  goalProgress: 80,
+  salesSeries: [
+    { month: 'Jan', value: 620_000 },
+    { month: 'Fev', value: 680_000 },
+    { month: 'Mar', value: 710_000 },
+    { month: 'Abr', value: 760_000 },
+    { month: 'Mai', value: 740_000 },
+    { month: 'Jun', value: 790_000 },
+    { month: 'Jul', value: 840_000 },
+    { month: 'Ago', value: 865_000 },
+    { month: 'Set', value: 905_000 },
+    { month: 'Out', value: 940_000 },
+    { month: 'Nov', value: 980_000 },
+    { month: 'Dez', value: 1_020_000 },
+  ],
+  customersSeries: [
+    { month: 'Jan', value: 180 },
+    { month: 'Fev', value: 192 },
+    { month: 'Mar', value: 205 },
+    { month: 'Abr', value: 214 },
+    { month: 'Mai', value: 226 },
+    { month: 'Jun', value: 231 },
+    { month: 'Jul', value: 238 },
+    { month: 'Ago', value: 246 },
+    { month: 'Set', value: 255 },
+    { month: 'Out', value: 261 },
+    { month: 'Nov', value: 269 },
+    { month: 'Dez', value: 278 },
+  ],
+}
