@@ -11,6 +11,7 @@ import {
 import { Card, CardHeader } from '../ui/Card'
 import { arAgingData } from '../../data/mockData'
 import { formatBRL } from '../../lib/utils'
+import { tooltipStyle, axisValueTickStyle, axisTickStyle } from '../../lib/chartStyles'
 
 interface ArAgingCardProps {
   delay?: number
@@ -28,22 +29,23 @@ export function ArAgingCard({ delay = 0 }: ArAgingCardProps) {
         iconColor="var(--accent-warm)"
       />
 
-      <div className="mb-3">
-        <div className="text-xs" style={{ color: 'var(--neutral-500)' }}>Total a Receber</div>
-        <div className="font-mono text-xl font-bold" style={{ color: 'var(--neutral-900)' }}>
+      <div style={{ marginBottom: 12 }}>
+        <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--neutral-500)' }}>Total a Receber</div>
+        <div className="font-mono" style={{ fontSize: 28, fontWeight: 700, lineHeight: 1.1, color: 'var(--neutral-900)' }}>
           {formatBRL(total)}
         </div>
       </div>
 
       {/* Stacked horizontal bar */}
-      <div className="flex h-4 rounded-full overflow-hidden mb-4" style={{ backgroundColor: 'var(--neutral-200)' }}>
+      <div className="flex overflow-hidden" style={{ height: 16, borderRadius: 8, marginBottom: 16, backgroundColor: 'var(--neutral-200)' }}>
         {arAgingData.map((item) => (
           <div
             key={item.range}
-            className="h-full transition-all duration-500"
             style={{
+              height: '100%',
               width: `${(item.value / total) * 100}%`,
               backgroundColor: item.color,
+              transition: 'width 0.5s ease-out',
             }}
             title={`${item.range}: ${formatBRL(item.value)}`}
           />
@@ -51,14 +53,14 @@ export function ArAgingCard({ delay = 0 }: ArAgingCardProps) {
       </div>
 
       {/* Legend */}
-      <div className="space-y-2 mb-4">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
         {arAgingData.map((item) => (
           <div key={item.range} className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: item.color }} />
-              <span className="text-xs" style={{ color: 'var(--neutral-700)' }}>{item.range}</span>
+            <div className="flex items-center" style={{ gap: 8 }}>
+              <div style={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: item.color }} />
+              <span style={{ fontSize: 14, fontWeight: 400, lineHeight: 1.5, color: 'var(--neutral-700)' }}>{item.range}</span>
             </div>
-            <span className="font-mono text-xs font-medium" style={{ color: 'var(--neutral-900)' }}>
+            <span className="font-mono" style={{ fontSize: 12, fontWeight: 500, color: 'var(--neutral-900)' }}>
               {formatBRL(item.value)}
             </span>
           </div>
@@ -66,12 +68,12 @@ export function ArAgingCard({ delay = 0 }: ArAgingCardProps) {
       </div>
 
       {/* Bar chart */}
-      <div className="h-32">
+      <div style={{ height: 128 }}>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={arAgingData} layout="vertical">
             <XAxis
               type="number"
-              tick={{ fontSize: 10, fill: 'var(--neutral-500)', fontFamily: 'JetBrains Mono' }}
+              tick={axisValueTickStyle}
               axisLine={false}
               tickLine={false}
               tickFormatter={(v: number) => `${(v / 1_000_000).toFixed(1)}M`}
@@ -79,23 +81,16 @@ export function ArAgingCard({ delay = 0 }: ArAgingCardProps) {
             <YAxis
               type="category"
               dataKey="range"
-              tick={{ fontSize: 10, fill: 'var(--neutral-500)' }}
+              tick={axisTickStyle}
               axisLine={false}
               tickLine={false}
               width={70}
             />
             <Tooltip
-              contentStyle={{
-                backgroundColor: 'white',
-                border: '1px solid var(--neutral-200)',
-                borderRadius: 12,
-                boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
-                fontFamily: 'JetBrains Mono',
-                fontSize: 12,
-              }}
+              contentStyle={tooltipStyle}
               formatter={(value?: number) => [formatBRL(value ?? 0), 'Valor']}
             />
-            <Bar dataKey="value" radius={[0, 4, 4, 0]} animationDuration={600}>
+            <Bar dataKey="value" radius={[0, 4, 4, 0]} animationDuration={600} animationEasing="ease-in-out">
               {arAgingData.map((entry, index) => (
                 <Cell key={index} fill={entry.color} />
               ))}

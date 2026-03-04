@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {
   LayoutDashboard,
   DollarSign,
@@ -28,83 +27,157 @@ const navItems: NavItem[] = [
   { icon: Settings, label: 'Configurações' },
 ]
 
-export function Sidebar() {
-  const [collapsed, setCollapsed] = useState(false)
+interface SidebarProps {
+  collapsed: boolean
+  onToggle: () => void
+  mobileOpen: boolean
+  onMobileClose: () => void
+}
+
+export function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose }: SidebarProps) {
+  const sidebarWidth = collapsed ? 72 : 260
 
   return (
-    <aside
-      className="fixed left-0 top-0 h-screen flex flex-col z-50 transition-all duration-300"
-      style={{
-        width: collapsed ? 72 : 260,
-        backgroundColor: 'var(--secondary-dark)',
-      }}
-    >
-      {/* Logo */}
-      <div className="flex items-center gap-3 px-4 h-16 border-b border-white/10">
+    <>
+      {/* Mobile overlay */}
+      {mobileOpen && (
         <div
-          className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
-          style={{ backgroundColor: 'var(--primary)' }}
-        >
-          <Leaf size={20} className="text-white" />
-        </div>
-        {!collapsed && (
-          <div className="animate-slide-in-right">
-            <div className="text-white font-semibold text-sm leading-tight">Conatus</div>
-            <div className="text-white/50 text-xs leading-tight">Environmental Tech</div>
-          </div>
-        )}
-      </div>
+          className="fixed inset-0 z-40 md:hidden"
+          style={{ backgroundColor: 'rgba(0,0,0,0.4)' }}
+          onClick={onMobileClose}
+        />
+      )}
 
-      {/* Navigation */}
-      <nav className="flex-1 py-4 px-3 space-y-1">
-        {navItems.map((item) => (
-          <button
-            key={item.label}
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group relative"
-            style={{
-              backgroundColor: item.active ? 'var(--primary)' : 'transparent',
-              borderLeft: item.active ? '4px solid white' : '4px solid transparent',
-            }}
-            title={collapsed ? item.label : undefined}
-          >
-            <item.icon
-              size={20}
-              className="flex-shrink-0"
-              style={{
-                color: 'white',
-                opacity: item.active ? 1 : 0.7,
-              }}
-            />
-            {!collapsed && (
-              <span
-                className="text-sm animate-slide-in-right"
-                style={{
-                  color: 'white',
-                  opacity: item.active ? 1 : 0.7,
-                  fontWeight: item.active ? 500 : 400,
-                }}
-              >
-                {item.label}
-              </span>
-            )}
-            {!item.active && (
-              <div className="absolute inset-0 rounded-lg bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-150" />
-            )}
-          </button>
-        ))}
-      </nav>
-
-      {/* Collapse Toggle */}
-      <button
-        onClick={() => setCollapsed(!collapsed)}
-        className="flex items-center justify-center h-12 border-t border-white/10 transition-colors hover:bg-white/5"
+      <aside
+        className="fixed left-0 top-0 h-screen flex flex-col z-50"
+        style={{
+          width: sidebarWidth,
+          backgroundColor: 'var(--secondary-dark)',
+          transition: 'width 0.3s ease, transform 0.3s ease',
+          transform: `translateX(${mobileOpen ? 0 : ''}px)`,
+        }}
       >
-        {collapsed ? (
-          <ChevronRight size={18} className="text-white/60" />
-        ) : (
-          <ChevronLeft size={18} className="text-white/60" />
-        )}
-      </button>
-    </aside>
+        {/* Logo */}
+        <div
+          className="flex items-center"
+          style={{
+            height: 64,
+            padding: '0 16px',
+            gap: 12,
+            borderBottom: '1px solid rgba(255,255,255,0.1)',
+          }}
+        >
+          <div
+            className="flex items-center justify-center flex-shrink-0"
+            style={{
+              width: 36,
+              height: 36,
+              borderRadius: 8,
+              backgroundColor: 'var(--primary)',
+            }}
+          >
+            <Leaf size={20} strokeWidth={1.5} className="text-white" />
+          </div>
+          {!collapsed && (
+            <div className="animate-slide-in-right">
+              <div style={{ color: 'white', fontWeight: 600, fontSize: 14, lineHeight: 1.3 }}>
+                Conatus
+              </div>
+              <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12, lineHeight: 1.3 }}>
+                Environmental Tech
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Navigation */}
+        <nav className="flex-1" style={{ padding: '16px 12px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+            {navItems.map((item) => (
+              <button
+                key={item.label}
+                className="flex items-center group relative"
+                style={{
+                  width: '100%',
+                  gap: 12,
+                  padding: '10px 12px',
+                  borderRadius: 8,
+                  backgroundColor: item.active ? 'var(--primary)' : 'transparent',
+                  borderLeft: item.active ? '4px solid white' : '4px solid transparent',
+                  border: 'none',
+                  borderLeftWidth: 4,
+                  borderLeftStyle: 'solid',
+                  borderLeftColor: item.active ? 'white' : 'transparent',
+                  cursor: 'pointer',
+                  transition: 'background-color 0.15s ease',
+                  minHeight: 44,
+                }}
+                title={collapsed ? item.label : undefined}
+                aria-label={item.label}
+                aria-current={item.active ? 'page' : undefined}
+              >
+                <item.icon
+                  size={20}
+                  strokeWidth={1.5}
+                  className="flex-shrink-0"
+                  style={{
+                    color: 'white',
+                    opacity: item.active ? 1 : 0.7,
+                  }}
+                />
+                {!collapsed && (
+                  <span
+                    className="animate-slide-in-right"
+                    style={{
+                      color: 'white',
+                      opacity: item.active ? 1 : 0.7,
+                      fontSize: 14,
+                      fontWeight: item.active ? 500 : 400,
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    {item.label}
+                  </span>
+                )}
+                {!item.active && (
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100"
+                    style={{
+                      borderRadius: 8,
+                      backgroundColor: 'rgba(255,255,255,0.05)',
+                      transition: 'opacity 0.15s ease',
+                    }}
+                  />
+                )}
+              </button>
+            ))}
+          </div>
+        </nav>
+
+        {/* Collapse Toggle — hidden on mobile */}
+        <button
+          onClick={onToggle}
+          className="hidden md:flex items-center justify-center"
+          style={{
+            height: 48,
+            borderTop: '1px solid rgba(255,255,255,0.1)',
+            background: 'none',
+            border: 'none',
+            borderTopStyle: 'solid' as const,
+            borderTopWidth: 1,
+            borderTopColor: 'rgba(255,255,255,0.1)',
+            cursor: 'pointer',
+            minHeight: 44,
+          }}
+          aria-label={collapsed ? 'Expandir menu' : 'Recolher menu'}
+        >
+          {collapsed ? (
+            <ChevronRight size={20} strokeWidth={1.5} style={{ color: 'rgba(255,255,255,0.6)' }} />
+          ) : (
+            <ChevronLeft size={20} strokeWidth={1.5} style={{ color: 'rgba(255,255,255,0.6)' }} />
+          )}
+        </button>
+      </aside>
+    </>
   )
 }
