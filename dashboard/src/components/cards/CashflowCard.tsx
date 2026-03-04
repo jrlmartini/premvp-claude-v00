@@ -24,25 +24,25 @@ export function CashflowCard({ delay = 0 }: CashflowCardProps) {
         icon={ArrowDownUp}
         title="Fluxo de Caixa Operacional"
         subtitle="MTD e YTD"
-        iconColor="var(--accent)"
+        iconColor="var(--chart-3)"
       />
 
       {/* KPIs */}
       <div className="grid grid-cols-2" style={{ gap: 12, marginBottom: 16 }}>
-        <div style={{ padding: 10, borderRadius: 8, backgroundColor: 'var(--neutral-50)' }}>
-          <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--neutral-500)', marginBottom: 4 }}>
+        <div style={{ padding: 10, borderRadius: 8, backgroundColor: 'var(--bg-main)' }}>
+          <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)', marginBottom: 4 }}>
             Geração MTD
           </div>
-          <div className="font-mono flex items-center" style={{ fontSize: 20, fontWeight: 600, lineHeight: 1.2, color: 'var(--success)', gap: 4 }}>
+          <div className="font-mono flex items-center" style={{ fontSize: 20, fontWeight: 600, lineHeight: 1.2, color: 'var(--st-success)', gap: 4 }}>
             <ArrowUpRight size={16} strokeWidth={1.5} />
             {formatBRL(operationalCashflow.mtd.net)}
           </div>
         </div>
-        <div style={{ padding: 10, borderRadius: 8, backgroundColor: 'var(--neutral-50)' }}>
-          <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--neutral-500)', marginBottom: 4 }}>
+        <div style={{ padding: 10, borderRadius: 8, backgroundColor: 'var(--bg-main)' }}>
+          <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)', marginBottom: 4 }}>
             Geração YTD
           </div>
-          <div className="font-mono flex items-center" style={{ fontSize: 20, fontWeight: 600, lineHeight: 1.2, color: 'var(--success)', gap: 4 }}>
+          <div className="font-mono flex items-center" style={{ fontSize: 20, fontWeight: 600, lineHeight: 1.2, color: 'var(--st-success)', gap: 4 }}>
             <ArrowUpRight size={16} strokeWidth={1.5} />
             {formatBRL(operationalCashflow.ytd.net)}
           </div>
@@ -52,16 +52,16 @@ export function CashflowCard({ delay = 0 }: CashflowCardProps) {
       {/* Inflow / Outflow detail */}
       <div className="grid grid-cols-2" style={{ gap: 12, marginBottom: 16 }}>
         <div className="flex items-center" style={{ gap: 8 }}>
-          <ArrowUpRight size={16} strokeWidth={1.5} style={{ color: 'var(--success)' }} />
-          <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--neutral-500)' }}>Entradas:</span>
-          <span className="font-mono" style={{ fontSize: 13, fontWeight: 500, color: 'var(--neutral-700)' }}>
+          <ArrowUpRight size={16} strokeWidth={1.5} style={{ color: 'var(--st-success)' }} />
+          <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--txt-secondary)' }}>Entradas:</span>
+          <span className="font-mono" style={{ fontSize: 13, fontWeight: 500, color: 'var(--txt-main)' }}>
             {formatBRL(operationalCashflow.mtd.inflow)}
           </span>
         </div>
         <div className="flex items-center" style={{ gap: 8 }}>
-          <ArrowDownRight size={16} strokeWidth={1.5} style={{ color: 'var(--danger)' }} />
-          <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--neutral-500)' }}>Saídas:</span>
-          <span className="font-mono" style={{ fontSize: 13, fontWeight: 500, color: 'var(--neutral-700)' }}>
+          <ArrowDownRight size={16} strokeWidth={1.5} style={{ color: 'var(--st-danger)' }} />
+          <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--txt-secondary)' }}>Saídas:</span>
+          <span className="font-mono" style={{ fontSize: 13, fontWeight: 500, color: 'var(--txt-main)' }}>
             {formatBRL(operationalCashflow.mtd.outflow)}
           </span>
         </div>
@@ -96,8 +96,8 @@ export function CashflowCard({ delay = 0 }: CashflowCardProps) {
               }
               wrapperStyle={{ fontSize: 11 }}
             />
-            <Bar dataKey="inflow" fill="#14A676" radius={[4, 4, 0, 0]} animationDuration={600} animationEasing="ease-in-out" />
-            <Bar dataKey="outflow" fill="#E63946" radius={[4, 4, 0, 0]} animationDuration={600} animationEasing="ease-in-out" />
+            <Bar dataKey="inflow" fill="var(--chart-4)" radius={[4, 4, 0, 0]} animationDuration={600} animationEasing="ease-in-out" />
+            <Bar dataKey="outflow" fill="var(--chart-7)" radius={[4, 4, 0, 0]} animationDuration={600} animationEasing="ease-in-out" />
           </BarChart>
         </ResponsiveContainer>
       </div>

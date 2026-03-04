@@ -25,15 +25,15 @@ export function CashPositionCard({ delay = 0 }: CashPositionCardProps) {
         icon={Landmark}
         title="Posição de Caixa"
         subtitle="Saldo em BRL"
-        iconColor="var(--secondary)"
+        iconColor="var(--chart-2)"
       />
 
       <div style={{ marginBottom: 16 }}>
-        <div className="font-mono" style={{ fontSize: 28, fontWeight: 700, lineHeight: 1.1, color: 'var(--neutral-900)' }}>
+        <div className="font-mono" style={{ fontSize: 28, fontWeight: 700, lineHeight: 1.1, color: 'var(--txt-main)' }}>
           {formatBRL(cashPosition.current)}
         </div>
         <div className="flex items-center" style={{ gap: 6, marginTop: 8 }}>
-          <TrendingUp size={16} strokeWidth={1.5} style={{ color: 'var(--success)' }} className="animate-pulse-soft" />
+          <TrendingUp size={16} strokeWidth={1.5} style={{ color: 'var(--st-success)' }} className="animate-pulse-soft" />
           <Badge variant="success">
             +{formatPercent(cashPosition.change)} vs mês anterior
           </Badge>
@@ -63,7 +63,7 @@ export function CashPositionCard({ delay = 0 }: CashPositionCardProps) {
               {cashPosition.history.map((_, index) => (
                 <Cell
                   key={index}
-                  fill={index === cashPosition.history.length - 1 ? '#0B6E4F' : '#62B6CB'}
+                  fill={index === cashPosition.history.length - 1 ? 'var(--chart-1)' : 'var(--chart-3)'}
                   opacity={index === cashPosition.history.length - 1 ? 1 : 0.7}
                 />
               ))}

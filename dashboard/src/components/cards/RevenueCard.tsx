@@ -30,24 +30,24 @@ export function RevenueCard({ delay = 0 }: RevenueCardProps) {
         icon={DollarSign}
         title="Receita"
         subtitle="MTD e YTD vs. Meta Runrate"
-        iconColor="var(--primary)"
+        iconColor="var(--chart-1)"
       />
 
       {/* KPI Row */}
       <div className="grid grid-cols-1 sm:grid-cols-3" style={{ gap: 16, marginBottom: 16 }}>
         {/* MTD */}
-        <div style={{ padding: 12, borderRadius: 8, backgroundColor: 'var(--neutral-50)' }}>
-          <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--neutral-500)', marginBottom: 4 }}>
+        <div style={{ padding: 12, borderRadius: 8, backgroundColor: 'var(--bg-main)' }}>
+          <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)', marginBottom: 4 }}>
             Receita MTD
           </div>
-          <div className="font-mono" style={{ fontSize: 28, fontWeight: 700, lineHeight: 1.1, color: 'var(--neutral-900)' }}>
+          <div className="font-mono" style={{ fontSize: 28, fontWeight: 700, lineHeight: 1.1, color: 'var(--txt-main)' }}>
             {formatBRL(revenueData.mtd.actual)}
           </div>
           <div className="flex items-center" style={{ gap: 4, marginTop: 8 }}>
             {mtdPct >= 0 ? (
-              <TrendingUp size={16} strokeWidth={1.5} style={{ color: 'var(--success)' }} className="animate-pulse-soft" />
+              <TrendingUp size={16} strokeWidth={1.5} style={{ color: 'var(--st-success)' }} className="animate-pulse-soft" />
             ) : (
-              <TrendingDown size={16} strokeWidth={1.5} style={{ color: 'var(--danger)' }} />
+              <TrendingDown size={16} strokeWidth={1.5} style={{ color: 'var(--st-danger)' }} />
             )}
             <Badge variant={mtdPct >= 0 ? 'success' : 'danger'}>
               {formatPercent(mtdPct)} vs meta
@@ -56,18 +56,18 @@ export function RevenueCard({ delay = 0 }: RevenueCardProps) {
         </div>
 
         {/* YTD */}
-        <div style={{ padding: 12, borderRadius: 8, backgroundColor: 'var(--neutral-50)' }}>
-          <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--neutral-500)', marginBottom: 4 }}>
+        <div style={{ padding: 12, borderRadius: 8, backgroundColor: 'var(--bg-main)' }}>
+          <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)', marginBottom: 4 }}>
             Receita YTD
           </div>
-          <div className="font-mono" style={{ fontSize: 28, fontWeight: 700, lineHeight: 1.1, color: 'var(--neutral-900)' }}>
+          <div className="font-mono" style={{ fontSize: 28, fontWeight: 700, lineHeight: 1.1, color: 'var(--txt-main)' }}>
             {formatBRL(revenueData.ytd.actual)}
           </div>
           <div className="flex items-center" style={{ gap: 4, marginTop: 8 }}>
             {ytdPct >= 0 ? (
-              <TrendingUp size={16} strokeWidth={1.5} style={{ color: 'var(--success)' }} className="animate-pulse-soft" />
+              <TrendingUp size={16} strokeWidth={1.5} style={{ color: 'var(--st-success)' }} className="animate-pulse-soft" />
             ) : (
-              <TrendingDown size={16} strokeWidth={1.5} style={{ color: 'var(--danger)' }} />
+              <TrendingDown size={16} strokeWidth={1.5} style={{ color: 'var(--st-danger)' }} />
             )}
             <Badge variant={ytdPct >= 0 ? 'success' : 'danger'}>
               {formatPercent(ytdPct)} vs meta
@@ -76,11 +76,11 @@ export function RevenueCard({ delay = 0 }: RevenueCardProps) {
         </div>
 
         {/* Average */}
-        <div style={{ padding: 12, borderRadius: 8, backgroundColor: 'var(--neutral-50)' }}>
-          <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--neutral-500)', marginBottom: 4 }}>
+        <div style={{ padding: 12, borderRadius: 8, backgroundColor: 'var(--bg-main)' }}>
+          <div style={{ fontSize: 12, fontWeight: 500, lineHeight: 1.4, color: 'var(--txt-secondary)', marginBottom: 4 }}>
             Média Mensal
           </div>
-          <div className="font-mono" style={{ fontSize: 20, fontWeight: 600, lineHeight: 1.2, color: 'var(--neutral-900)' }}>
+          <div className="font-mono" style={{ fontSize: 20, fontWeight: 600, lineHeight: 1.2, color: 'var(--txt-main)' }}>
             {formatBRL(revenueData.mtd.average)}
           </div>
           <div className="flex items-center" style={{ gap: 4, marginTop: 8 }}>
@@ -95,17 +95,11 @@ export function RevenueCard({ delay = 0 }: RevenueCardProps) {
       <div style={{ height: 192 }}>
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={revenueData.dailyMTD}>
-            <defs>
-              <linearGradient id="revenueGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#0B6E4F" stopOpacity={0.15} />
-                <stop offset="95%" stopColor="#0B6E4F" stopOpacity={0} />
-              </linearGradient>
-            </defs>
             <CartesianGrid {...gridStyle} />
             <XAxis
               dataKey="day"
               tick={axisTickStyle}
-              axisLine={{ stroke: 'var(--neutral-200)' }}
+              axisLine={{ stroke: 'var(--str-default)' }}
               tickLine={false}
             />
             <YAxis
@@ -120,21 +114,21 @@ export function RevenueCard({ delay = 0 }: RevenueCardProps) {
             />
             <ReferenceLine
               y={revenueData.mtd.goal / 22}
-              stroke="var(--accent-warm)"
+              stroke="var(--chart-6)"
               strokeDasharray="4 4"
               label={{
                 value: 'Meta/dia',
                 position: 'right',
-                fill: 'var(--accent-warm)',
+                fill: 'var(--chart-6)',
                 fontSize: 10,
               }}
             />
             <Area
               type="monotone"
               dataKey="value"
-              stroke="#0B6E4F"
+              stroke="var(--chart-1)"
               strokeWidth={2}
-              fill="url(#revenueGradient)"
+              fill="var(--chart-1)" fillOpacity={0.15}
               animationDuration={600}
               animationEasing="ease-in-out"
             />
