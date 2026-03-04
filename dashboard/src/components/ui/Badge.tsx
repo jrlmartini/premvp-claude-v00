@@ -4,11 +4,11 @@ interface BadgeProps {
 }
 
 const variants = {
-  success: { bg: '#E8F5E9', color: 'var(--success)' },
-  warning: { bg: '#FFF3E0', color: 'var(--warning)' },
-  danger: { bg: '#FFEBEE', color: 'var(--danger)' },
-  info: { bg: '#E0F4F8', color: 'var(--info)' },
-  neutral: { bg: 'var(--neutral-100)', color: 'var(--neutral-500)' },
+  success: { bg: 'var(--st-success)', color: 'var(--txt-modal)' },
+  warning: { bg: 'var(--st-warning)', color: 'var(--txt-modal)' },
+  danger: { bg: 'var(--st-danger)', color: 'var(--txt-modal)' },
+  info: { bg: 'var(--chart-3)', color: 'var(--txt-modal)' },
+  neutral: { bg: 'var(--bg-modal)', color: 'var(--txt-main)' },
 }
 
 export function Badge({ variant, children }: BadgeProps) {
@@ -19,7 +19,7 @@ export function Badge({ variant, children }: BadgeProps) {
       style={{
         backgroundColor: s.bg,
         color: s.color,
-        borderRadius: 6,
+        borderRadius: 8,
         padding: '2px 8px',
         fontSize: 12,
         fontWeight: 500,
